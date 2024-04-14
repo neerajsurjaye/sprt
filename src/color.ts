@@ -2,6 +2,8 @@ import Vec3 from "./vec3";
 
 class Color{
     static writeColor(col : Vec3) : string{
+
+        //maps 0->1 to 0->255
         let r = col.x;
         let g = col.y;
         let b = col.z;
