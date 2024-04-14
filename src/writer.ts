@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-function clearFile(fileName){
+function clearFile(fileName : string){
     try{
         fs.writeFileSync(fileName , "");
     }catch(err){
@@ -8,7 +8,7 @@ function clearFile(fileName){
     }
 }
 
-function appendToFile(fileName , data){
+function appendToFile(fileName : string, data : string){
     try{
         fs.writeFileSync(fileName , data , {flag : 'a+'});
     }catch(err){
@@ -16,7 +16,7 @@ function appendToFile(fileName , data){
     }
 }
 
-function testWriter(){
+function testWriter(fileName : string){
     try{
         fs.writeFileSync(fileName, "data writter");
     }catch(err){

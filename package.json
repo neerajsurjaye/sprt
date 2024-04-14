@@ -4,7 +4,8 @@
   "description": "Raytracing engine",
   "main": "index.js",
   "scripts": {
-    "test": "./index.js"
+    "test": "./index.js",
+    "code" : "npx tsc && node ./build/app.js"
   },
   "author": "Neeraj Surjaye",
   "license": "MIT",

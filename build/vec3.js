@@ -15,7 +15,6 @@ class Vec3 {
     }
     set x(val) {
         this.vec[0] = val;
-        console.log(`Adding ${val} for x  ${this.vec[0]}`);
     }
     set y(val) {
         this.vec[1] = val;
@@ -24,25 +23,51 @@ class Vec3 {
         this.vec[2] = val;
     }
     add(adder) {
-        this.x = this.x + adder.x;
-        this.y = this.y + adder.y;
-        this.z = this.z + adder.z;
+        let ret = new Vec3(0, 0, 0);
+        ret.x = this.x + adder.x;
+        ret.y = this.y + adder.y;
+        ret.z = this.z + adder.z;
         return this;
     }
     substract(sub) {
-        this.x = this.x - sub.x;
-        this.y = this.y - sub.y;
-        this.z = this.z - sub.z;
+        let ret = new Vec3(0, 0, 0);
+        ret.x = this.x - sub.x;
+        ret.y = this.y - sub.y;
+        ret.z = this.z - sub.z;
         return this;
+        //this.add(sub.multiply(-1));
     }
     multiply(mul) {
-        this.x = this.x * mul;
-        this.y = this.y * mul;
-        this.z = this.z * mul;
+        let ret = new Vec3(0, 0, 0);
+        ret.x = this.x * mul;
+        ret.y = this.y * mul;
+        ret.z = this.z * mul;
+        return this;
+    }
+    multiplyVec(mul) {
+        let ret = new Vec3(0, 0, 0);
+        ret.x = this.x * mul.x;
+        ret.y = this.y * mul.y;
+        ret.z = this.z * mul.z;
         return this;
     }
     divide(div) {
-        this.multiply(1 / div);
+        return this.multiply(1 / div);
+    }
+    lengthSquared() {
+        return this.x * this.x + this.y * this.y + this.z * this.z;
+    }
+    length() {
+        return Math.sqrt(this.lengthSquared());
+    }
+    dot(inp) {
+        return this.x * inp.x + this.y * inp.y + this.z * inp.z;
+    }
+    cross(inp) {
+        return new Vec3(this.y * inp.z - this.z * inp.y, this.z * inp.x - this.x * inp.z, this.x * inp.y - this.y * inp.x);
+    }
+    unitVector() {
+        return this.divide(this.length());
     }
 }
 exports.default = Vec3;

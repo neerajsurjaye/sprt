@@ -20,7 +20,7 @@ function appendToFile(fileName, data) {
         console.error(err);
     }
 }
-function testWriter() {
+function testWriter(fileName) {
     try {
         fs_1.default.writeFileSync(fileName, "data writter");
     }

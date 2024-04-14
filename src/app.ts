@@ -1,4 +1,6 @@
-import writer from "./writer.js";
+import Color from "./color";
+import Vec3 from "./vec3";
+import writer from "./writer";
 
 function main(){
 
@@ -16,7 +18,8 @@ function main(){
     for(let i = 0 ; i < height ; i++){
         console.log(`Lines remaining ${height - i} ----`);
         for(let j = 0 ; j < width ; j++){
-            writer.appendToFile(fileName , `${i} ${j} ${(255 - Math.min(i , j))}\n`);
+            let pixelColor : Vec3 = new Vec3(i / (width - 1) , j /(height - 1) , 0);
+            writer.appendToFile(fileName , Color.writeColor(pixelColor));
         }
     }
 
