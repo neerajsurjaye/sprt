@@ -9,3 +9,4 @@ class Ray {
         return this.origin.add(this.direction.multiply(t));
     }
 }
+exports.default = Ray;

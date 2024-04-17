@@ -4,6 +4,8 @@ class Ray{
 
 
     //a + t * b where a is a point b is a vector and t is a scaler multiplying the length of b
+    //see vector addition for refrence
+    
     origin:Vec3;
     direction:Vec3;
 
@@ -16,3 +18,5 @@ class Ray{
         return this.origin.add(this.direction.multiply(t));
     }
 }
+
+export default Ray;
