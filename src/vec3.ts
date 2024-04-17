@@ -37,7 +37,7 @@ class Vec3 {
         ret.x = this.x + adder.x;
         ret.y = this.y + adder.y;
         ret.z = this.z + adder.z;
-        return this;
+        return ret;
     }
 
     substract(sub: Vec3): Vec3 {
@@ -45,7 +45,7 @@ class Vec3 {
         ret.x = this.x - sub.x;
         ret.y = this.y - sub.y;
         ret.z = this.z - sub.z;
-        return this;
+        return ret;
 
         //this.add(sub.multiply(-1));
     }
@@ -56,7 +56,7 @@ class Vec3 {
         ret.x = this.x * mul;
         ret.y = this.y * mul;
         ret.z = this.z * mul;
-        return this;
+        return ret;
 
     }
 
@@ -66,7 +66,7 @@ class Vec3 {
         ret.x = this.x * mul.x;
         ret.y = this.y * mul.y;
         ret.z = this.z * mul.z;
-        return this;
+        return ret;
 
     }
 
