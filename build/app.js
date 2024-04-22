@@ -9,9 +9,20 @@ const ray_1 = __importDefault(require("./ray"));
 const vec3_1 = __importDefault(require("./vec3"));
 const writer_1 = __importDefault(require("./writer"));
 function rayColor(ray) {
+    if (hitSphere(new vec3_1.default(0, 0, -1), 0.5, ray)) {
+        return new vec3_1.default(1, 0, 0);
+    }
     let unitDirection = ray.direction.unitVector();
     let a = 0.5 * (unitDirection.y + 1); //transfrms -1 to 1 into 0 -> 1
     return new vec3_1.default(1, 1, 1).multiply(1.0 - a).add(new vec3_1.default(0, 0, 1).multiply(a)); //see this part
+}
+function hitSphere(center, radius, ray) {
+    let oc = center.substract(ray.origin);
+    let a = ray.direction.dot(ray.direction);
+    let b = -2 * ray.direction.dot(oc);
+    let c = oc.dot(oc) - radius * radius;
+    let discirminant = b * b - 4 * a * c;
+    return (discirminant >= 0);
 }
 function main() {
     //width / height = 16 / 9 ----> width * 9 = height * 16

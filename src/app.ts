@@ -7,9 +7,23 @@ import writer from "./writer";
 
 
 function rayColor (ray : Ray) : Vec3{
+
+    if(hitSphere(new Vec3(0 , 0 , -1) , 0.5 , ray)){
+        return new Vec3(1,  0 , 0);
+    }
+
     let unitDirection : Vec3 = ray.direction.unitVector();
     let a : number  = 0.5 * (unitDirection.y + 1); //transfrms -1 to 1 into 0 -> 1
     return new Vec3(1 , 1 , 1).multiply(1.0 - a).add(new Vec3(0 , 0 , 1).multiply(a)); //see this part
+}
+
+function hitSphere(center : Vec3 , radius : number , ray : Ray) : boolean{
+    let  oc : Vec3 = center.substract(ray.origin);
+    let a : number = ray.direction.dot(ray.direction);
+    let b : number = -2 * ray.direction.dot(oc);
+    let c : number = oc.dot(oc) - radius * radius;
+    let discirminant = b * b - 4 * a * c;
+    return (discirminant >= 0);
 }
 
 function main(){
