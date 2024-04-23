@@ -9,8 +9,10 @@ const ray_1 = __importDefault(require("./ray"));
 const vec3_1 = __importDefault(require("./vec3"));
 const writer_1 = __importDefault(require("./writer"));
 function rayColor(ray) {
-    if (hitSphere(new vec3_1.default(0, 0, -1), 0.5, ray)) {
-        return new vec3_1.default(1, 0, 0);
+    let t = hitSphere(new vec3_1.default(0, 0, -1), 0.5, ray);
+    if (t > 0) {
+        let N = ray.at(t).substract(new vec3_1.default(0, 0, -1)).unitVector();
+        return new vec3_1.default(N.x + 1, N.y + 1, N.z + 1).multiply(0.5);
     }
     let unitDirection = ray.direction.unitVector();
     let a = 0.5 * (unitDirection.y + 1); //transfrms -1 to 1 into 0 -> 1
@@ -22,7 +24,12 @@ function hitSphere(center, radius, ray) {
     let b = -2 * ray.direction.dot(oc);
     let c = oc.dot(oc) - radius * radius;
     let discirminant = b * b - 4 * a * c;
-    return (discirminant >= 0);
+    if (discirminant < 0) {
+        return -1;
+    }
+    else {
+        return (-b - Math.sqrt(discirminant)) / (2.0 * a);
+    }
 }
 function main() {
     //width / height = 16 / 9 ----> width * 9 = height * 16
