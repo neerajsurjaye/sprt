@@ -1,17 +1,29 @@
 import { log } from "console";
 import Color from "./color";
-import Ray from "./ray";
-import Vec3 from "./vec3";
+import Ray from "./Ray";
+import Vec3 from "./Vec3";
 import writer from "./writer";
+import Hittable from "./Hittable";
+import HitRecord from "./HitRecord";
+import Utils from "./Utils";
+import HittableList from "./HittableList";
+import Sphere from "./Sphere";
 
 
 
-function rayColor (ray : Ray) : Vec3{
+function rayColor (ray : Ray , world : Hittable) : Vec3{
 
-    let t = hitSphere(new Vec3(0 , 0 , -1) , 0.5 , ray);
-    if(t > 0){
-        let N : Vec3 = ray.at(t).substract(new Vec3(0 ,0 , -1)).unitVector();
-        return new Vec3(N.x + 1 , N.y + 1 , N.z + 1).multiply(0.5);
+    // let t = hitSphere(new Vec3(0 , 0 , -1) , 0.5 , ray);
+    // if(t > 0){
+    //     let N : Vec3 = ray.at(t).substract(new Vec3(0 ,0 , -1)).unitVector();
+    //     return new Vec3(N.x + 1 , N.y + 1 , N.z + 1).multiply(0.5);
+    // }
+
+    let rec : HitRecord = new HitRecord();
+    if(world.hit(ray , 0 , Utils.INFINITY , rec)){
+        console.log("rec.normal " , rec.normal);
+        
+        return rec.normal.add(new Vec3(1 , 1 ,1)).multiply(0.5);
     }
 
     let unitDirection : Vec3 = ray.direction.unitVector();
@@ -60,6 +72,11 @@ function main(){
     let imageHeight : number = Math.floor(imageWidth / aspectRatio);
     imageHeight = (imageHeight < 1) ? 1 : imageHeight;
 
+    //world
+    let world : HittableList = new HittableList();
+    world.add(new Sphere(new Vec3(0 , 0 , -1) , 0.5));
+    world.add(new Sphere(new Vec3(0 , -100.5, -1) , 100));
+
     let focalLength = 1.0;
     let viewPortHeight : number = 2;
     let viewPortWidth : number = viewPortHeight * (imageWidth / imageHeight); 
@@ -106,7 +123,7 @@ function main(){
             let rayDirection = pixelCenter.substract(cameraCenter);
             let ray : Ray = new Ray(cameraCenter , rayDirection);
 
-            let pixelColor : Vec3 = rayColor(ray);
+            let pixelColor : Vec3 = rayColor(ray , world);
 
             writer.appendToFile(fileName , Color.writeColor(pixelColor));
 
