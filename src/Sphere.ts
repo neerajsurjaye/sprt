@@ -24,7 +24,7 @@ class Sphere implements Hittable{
         }
 
         let sqrtd : number = Math.sqrt(discirminant);
-        let root : number = h - sqrtd / a;
+        let root : number = (h - sqrtd) / a;
         
         if(root <= ray_tmin || root >=  ray_tmax){
             root = h + sqrtd / a;

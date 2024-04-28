@@ -20,7 +20,6 @@ function rayColor(ray, world) {
     // }
     let rec = new HitRecord_1.default();
     if (world.hit(ray, 0, Utils_1.default.INFINITY, rec)) {
-        console.log("rec.normal ", rec.normal);
         return rec.normal.add(new Vec3_1.default(1, 1, 1)).multiply(0.5);
     }
     let unitDirection = ray.direction.unitVector();
@@ -59,7 +58,9 @@ function main() {
     imageHeight = (imageHeight < 1) ? 1 : imageHeight;
     //world
     let world = new HittableList_1.default();
-    world.add(new Sphere_1.default(new Vec3_1.default(0, 0, -1), 0.5));
+    world.add(new Sphere_1.default(new Vec3_1.default(-0.2, 0, -2), 0.5));
+    world.add(new Sphere_1.default(new Vec3_1.default(0.8, 0, -2), 0.5));
+    world.add(new Sphere_1.default(new Vec3_1.default(-1, 0, -2), 0.5));
     world.add(new Sphere_1.default(new Vec3_1.default(0, -100.5, -1), 100));
     let focalLength = 1.0;
     let viewPortHeight = 2;

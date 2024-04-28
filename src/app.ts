@@ -20,9 +20,7 @@ function rayColor (ray : Ray , world : Hittable) : Vec3{
     // }
 
     let rec : HitRecord = new HitRecord();
-    if(world.hit(ray , 0 , Utils.INFINITY , rec)){
-        console.log("rec.normal " , rec.normal);
-        
+    if(world.hit(ray , 0 , Utils.INFINITY , rec)){        
         return rec.normal.add(new Vec3(1 , 1 ,1)).multiply(0.5);
     }
 
@@ -74,7 +72,9 @@ function main(){
 
     //world
     let world : HittableList = new HittableList();
-    world.add(new Sphere(new Vec3(0 , 0 , -1) , 0.5));
+    world.add(new Sphere(new Vec3(-0.2 , 0 , -2) , 0.5));
+    world.add(new Sphere(new Vec3(0.8 , 0 , -2) , 0.5));
+    world.add(new Sphere(new Vec3(-1 , 0 , -2) , 0.5));
     world.add(new Sphere(new Vec3(0 , -100.5, -1) , 100));
 
     let focalLength = 1.0;

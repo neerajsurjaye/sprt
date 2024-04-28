@@ -15,7 +15,7 @@ class Sphere {
             return false;
         }
         let sqrtd = Math.sqrt(discirminant);
-        let root = h - sqrtd / a;
+        let root = (h - sqrtd) / a;
         if (root <= ray_tmin || root >= ray_tmax) {
             root = h + sqrtd / a;
             if (root <= ray_tmin || root >= ray_tmax) {
