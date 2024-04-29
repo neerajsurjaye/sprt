@@ -1,0 +1,16 @@
+{
+  "name": "sprt",
+  "version": "1.0.0",
+  "description": "Raytracing engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "./index.js",
+    "code" : "npx tsc && node ./build/app.js"
+  },
+  "author": "Neeraj Surjaye",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
+  }
+}
