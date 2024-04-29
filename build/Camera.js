@@ -7,8 +7,9 @@ const HitRecord_1 = __importDefault(require("./HitRecord"));
 const Ray_1 = __importDefault(require("./Ray"));
 const Utils_1 = __importDefault(require("./Utils"));
 const Vec3_1 = __importDefault(require("./Vec3"));
-const color_1 = __importDefault(require("./color"));
+const Color_1 = __importDefault(require("./Color"));
 const writer_1 = __importDefault(require("./writer"));
+const Interval_1 = __importDefault(require("./Interval"));
 class Camera {
     constructor() {
         this.aspectRatio = 16 / 9;
@@ -44,7 +45,7 @@ class Camera {
                 let rayDirection = pixelCenter.substract(this.cameraCenter);
                 let ray = new Ray_1.default(this.cameraCenter, rayDirection);
                 let pixelColor = this.rayColor(ray, world);
-                writer_1.default.appendToFile(fileName, color_1.default.writeColor(pixelColor));
+                writer_1.default.appendToFile(fileName, Color_1.default.writeColor(pixelColor));
             }
         }
     }
@@ -55,7 +56,7 @@ class Camera {
         //     return new Vec3(N.x + 1 , N.y + 1 , N.z + 1).multiply(0.5);
         // }
         let rec = new HitRecord_1.default();
-        if (world.hit(ray, 0, Utils_1.default.INFINITY, rec)) {
+        if (world.hit(ray, new Interval_1.default(0, Utils_1.default.INFINITY), rec)) {
             return rec.normal.add(new Vec3_1.default(1, 1, 1)).multiply(0.5);
         }
         //colors world background

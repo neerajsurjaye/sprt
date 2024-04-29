@@ -1,5 +1,5 @@
 import { log } from "console";
-import Color from "./color";
+import Color from "./Color";
 import Ray from "./Ray";
 import Vec3 from "./Vec3";
 import writer from "./writer";

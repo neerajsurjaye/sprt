@@ -3,8 +3,9 @@ import Hittable from "./Hittable";
 import Ray from "./Ray";
 import Utils from "./Utils";
 import Vec3 from "./Vec3";
-import Color from "./color";
+import Color from "./Color";
 import writer from "./writer";
+import Interval from "./Interval";
 
 class Camera{
 
@@ -96,7 +97,7 @@ class Camera{
         // }
     
         let rec : HitRecord = new HitRecord();
-        if(world.hit(ray , 0 , Utils.INFINITY , rec)){        
+        if(world.hit(ray , new Interval(0, Utils.INFINITY) , rec)){        
             return rec.normal.add(new Vec3(1 , 1 ,1)).multiply(0.5);
         }
     

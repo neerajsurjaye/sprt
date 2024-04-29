@@ -3,6 +3,8 @@ import HitRecord from "./HitRecord";
 import Hittable from "./Hittable";
 import Ray from "./Ray";
 import Vec3 from "./Vec3";
+import Interval from "./Interval";
+import { close } from "fs";
 
 class HittableList implements Hittable{
 
@@ -20,12 +22,12 @@ class HittableList implements Hittable{
         this.objects = [];
     }
 
-    hit(r: Ray, ray_tmin: number, ray_tmax: number, rec: HitRecord): boolean {
+    hit(r: Ray, rayT : Interval,  rec: HitRecord): boolean {
         let hitAnyThing : boolean = false;
-        let closestSoFar : number = ray_tmax;
+        let closestSoFar : number = rayT.max;
 
         for(let object  of this.objects){
-            if(object.hit(r , ray_tmin , closestSoFar,rec)){
+            if(object.hit(r , new Interval(rayT.min , closestSoFar) , rec)){
                 hitAnyThing = true;
                 closestSoFar = rec.t;
 

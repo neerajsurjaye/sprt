@@ -1,5 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const Interval_1 = __importDefault(require("./Interval"));
 class HittableList {
     constructor() {
         this.objects = [];
@@ -10,11 +14,11 @@ class HittableList {
     clear() {
         this.objects = [];
     }
-    hit(r, ray_tmin, ray_tmax, rec) {
+    hit(r, rayT, rec) {
         let hitAnyThing = false;
-        let closestSoFar = ray_tmax;
+        let closestSoFar = rayT.max;
         for (let object of this.objects) {
-            if (object.hit(r, ray_tmin, closestSoFar, rec)) {
+            if (object.hit(r, new Interval_1.default(rayT.min, closestSoFar), rec)) {
                 hitAnyThing = true;
                 closestSoFar = rec.t;
             }

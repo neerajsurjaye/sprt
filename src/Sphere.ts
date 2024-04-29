@@ -1,5 +1,6 @@
 import HitRecord from "./HitRecord";
 import Hittable from "./Hittable";
+import Interval from "./Interval";
 import Ray from "./Ray";
 import Vec3 from "./Vec3";
 
@@ -12,7 +13,7 @@ class Sphere implements Hittable{
         this.radius = Math.max(radius , 0);
     }
 
-    hit(ray: Ray, ray_tmin: number, ray_tmax: number, rec: HitRecord): boolean {
+    hit(ray: Ray, rayT : Interval , rec: HitRecord): boolean {
         let oc : Vec3 = this.center.substract(ray.origin);
         let a : number = ray.direction.lengthSquared();
         let h : number = ray.direction.dot(oc);
@@ -26,13 +27,16 @@ class Sphere implements Hittable{
         let sqrtd : number = Math.sqrt(discirminant);
         let root : number = (h - sqrtd) / a;
         
-        if(root <= ray_tmin || root >=  ray_tmax){
+        // if(root <= rayT.min || root >=  rayT.max){
+        if(!rayT.surrounds(root)){
             root = h + sqrtd / a;
-            if(root <= ray_tmin || root >=  ray_tmax){
+            // if(root <= rayT.min || root >=  rayT.max){
+            if(!rayT.surrounds(root)){
                 return false;
             }
         }
 
+    
         rec.t = root;
         rec.p = ray.at(rec.t);
         let outwardNormal : Vec3 = rec.p.substract(this.center).divide(this.radius);        

@@ -5,7 +5,7 @@ class Sphere {
         this.center = center;
         this.radius = Math.max(radius, 0);
     }
-    hit(ray, ray_tmin, ray_tmax, rec) {
+    hit(ray, rayT, rec) {
         let oc = this.center.substract(ray.origin);
         let a = ray.direction.lengthSquared();
         let h = ray.direction.dot(oc);
@@ -16,9 +16,11 @@ class Sphere {
         }
         let sqrtd = Math.sqrt(discirminant);
         let root = (h - sqrtd) / a;
-        if (root <= ray_tmin || root >= ray_tmax) {
+        // if(root <= rayT.min || root >=  rayT.max){
+        if (!rayT.surrounds(root)) {
             root = h + sqrtd / a;
-            if (root <= ray_tmin || root >= ray_tmax) {
+            // if(root <= rayT.min || root >=  rayT.max){
+            if (!rayT.surrounds(root)) {
                 return false;
             }
         }
