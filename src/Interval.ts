@@ -33,6 +33,12 @@ class Interval{
         return x > this.min && x < this.max;
     }
 
+    clamp(x : number) : number{
+        if(x < this.min) return this.min;
+        if(x > this.max) return this.max;
+        return x;
+    }
+
 }
 
 export default Interval;

@@ -13,6 +13,16 @@ class Utils{
     static degreesToRadians(degrees : number) : number{
         return degrees * this.PI / 180;
     }
+
+    static randomDouble() : number{
+        return Math.random();
+    }
+
+    static randomDoubleRange(min : number , max : number){
+        return min + (max - min) * this.randomDouble();
+    }
+
+    
     
 }
 
