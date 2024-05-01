@@ -70,9 +70,9 @@ function main(){
     
     //world
     let world : HittableList = new HittableList();
-    world.add(new Sphere(new Vec3(-0.2 , 0 , -2) , 0.5));
-    world.add(new Sphere(new Vec3(0.8 , 0 , -2) , 0.5));
-    world.add(new Sphere(new Vec3(-1 , 0 , -2) , 0.5));
+    world.add(new Sphere(new Vec3(0 , 0 , -1) , 0.5));
+    world.add(new Sphere(new Vec3(0.8 , 0 , -1.5) , 0.5));
+    world.add(new Sphere(new Vec3(-1.5 , 0 , -2) , 0.5));
     world.add(new Sphere(new Vec3(0 , -100.5, -1) , 100));
 
     let camera : Camera = new Camera();

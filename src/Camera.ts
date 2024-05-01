@@ -6,6 +6,8 @@ import Vec3 from "./Vec3";
 import Color from "./Color";
 import writer from "./writer";
 import Interval from "./Interval";
+import Writer from "./writer";
+import { write } from "fs";
 
 class Camera{
 
@@ -24,6 +26,7 @@ class Camera{
     viewPortUpperLeft: Vec3;
     samplePerPixel: any;
     pixelSampleScale: number;
+    maxDepth: number;
     
 
     constructor(){
@@ -56,8 +59,9 @@ class Camera{
         this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
         
         console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
-        this.samplePerPixel = 10;
+        this.samplePerPixel = 100;
         this.pixelSampleScale = 1 / this.samplePerPixel;
+        this.maxDepth = 25;
     }
 
 
@@ -65,13 +69,18 @@ class Camera{
         
     
         const fileName = "out.ppm";
-        writer.clearFile(fileName)
+        // writer.clearFile(fileName)
+        let writer : Writer = new Writer(fileName);
     
 
 
-        writer.appendToFile(fileName , "P3\n");
-        writer.appendToFile(fileName , `${this.imageWidth} ${this.imageHeight}\n`);
-        writer.appendToFile(fileName , "255\n");
+        // writer.appendToFile(fileName , "P3\n");
+        // writer.appendToFile(fileName , `${this.imageWidth} ${this.imageHeight}\n`);
+        // writer.appendToFile(fileName , "255\n");
+
+        writer.append("P3\n");
+        writer.append(`${this.imageWidth} ${this.imageHeight}\n`);
+        writer.append("255\n");
 
         for(let j = 0 ; j < this.imageHeight ; j++){
             console.log(`Lines remaining ${this.imageHeight - j} ----`);
@@ -86,22 +95,26 @@ class Camera{
 
                 for(let sample = 0 ; sample < this.samplePerPixel; sample++){
                     let ray:Ray = this.getRay(i , j);
-                    pixelColor = pixelColor.add(this.rayColor(ray , world));
+                    pixelColor = pixelColor.add(this.rayColor(ray , this.maxDepth ,  world));
                 }
                 // let pixelColor : this.rayColor(ray , world);
 
-                writer.appendToFile(fileName , Color.writeColor(pixelColor.multiply(this.pixelSampleScale)));
+                writer.append(Color.writeColor(pixelColor.multiply(this.pixelSampleScale)));
 
             }
         }
 
+        writer.write();
+
 
     }
 
+    //genereates a random vector for antialiasing
     sampleSquare() : Vec3{
         return new Vec3(Utils.randomDouble() - 0.5 , Utils.randomDouble() - 0.5 , 0);
     }
 
+    //gets a ray for pixel at i , j with some randomization
     getRay(i : number , j : number) : Ray{
         let offSet : Vec3 = this.sampleSquare();
         let pixelSample : Vec3 = this.pixel00Loc.add(this.pixelDeltaU.multiply(offSet.x + i)).add(this.pixelDeltaV.multiply(offSet.y + j));
@@ -111,7 +124,10 @@ class Camera{
         return new Ray(rayOrigin , rayDirection);
     }
 
-    rayColor (ray : Ray , world : Hittable) : Vec3{
+    rayColor (ray : Ray , depth : number , world : Hittable) : Vec3{
+
+        if(depth <= 0)
+            return new Vec3(0 , 0 , 0);
 
         // let t = hitSphere(new Vec3(0 , 0 , -1) , 0.5 , ray);
         // if(t > 0){
@@ -120,14 +136,17 @@ class Camera{
         // }
     
         let rec : HitRecord = new HitRecord();
-        if(world.hit(ray , new Interval(0, Utils.INFINITY) , rec)){        
-            return rec.normal.add(new Vec3(1 , 1 ,1)).multiply(0.5);
+        if(world.hit(ray , new Interval(0.001, Utils.INFINITY) , rec)){        
+            // return rec.normal.add(new Vec3(1 , 1 ,1)).multiply(0.5);
+            // let direction : Vec3 = Vec3.randomOnHemisphere(rec.normal);
+            let direction : Vec3 = rec.normal.add(Vec3.randomUnitVector()); //todo see again
+            return this.rayColor(new Ray(rec.p , direction), depth - 1 , world).multiply(0.5); //see
         }
     
         //colors world background
         let unitDirection : Vec3 = ray.direction.unitVector();
         let a : number  = 0.5 * (unitDirection.y + 1); //transfrms -1 to 1 into 0 -> 1
-        return new Vec3(1 , 1 , 1).multiply(1.0 - a).add(new Vec3(0 , 0 , 1).multiply(a)); //see this part
+        return new Vec3(1 , 1 , 1).multiply(1.0 - a).add(new Vec3(.5 , .75 , 1).multiply(a)); //see this part
     }
 
 }

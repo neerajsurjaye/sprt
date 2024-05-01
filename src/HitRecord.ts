@@ -4,6 +4,8 @@ import Vec3 from "./Vec3";
 class HitRecord{
     p : Vec3;
     normal : Vec3;
+
+    //the value t in quadrati equation
     t : number ;
     frontFace : boolean;
 

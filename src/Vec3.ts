@@ -1,3 +1,5 @@
+import Utils from "./Utils";
+
 class Vec3 {
     //* Not Tested *// 
 
@@ -100,6 +102,37 @@ class Vec3 {
     unitVector() : Vec3{
         return this.divide(this.length());
     }
+
+    static random() : Vec3{
+        return new Vec3(Utils.randomDouble() , Utils.randomDouble() , Utils.randomDouble());
+    }
+
+    static randomRange(min : number , max : number) : Vec3{
+        return new Vec3(Utils.randomDoubleRange(min , max) , Utils.randomDoubleRange(min , max), Utils.randomDoubleRange(min , max));
+    }
+
+    static randomInUnitSphere() : Vec3{
+        while(true){
+            let p : Vec3 = Vec3.randomRange(-1 , 1);
+            if(p.lengthSquared() < 1){
+                return p;
+            }
+        }
+    }
+
+    static randomUnitVector() : Vec3{
+        return this.randomInUnitSphere().unitVector();
+    }
+
+    static randomOnHemisphere(normal : Vec3) : Vec3{
+        let onUnitSphere : Vec3 = this.randomUnitVector();
+        if(onUnitSphere.dot(normal) > 0){
+            return onUnitSphere;
+        }
+        return onUnitSphere.multiply(-1);
+    }
+
+
 }
 
 export default Vec3;
