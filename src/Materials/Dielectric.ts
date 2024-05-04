@@ -1,4 +1,5 @@
 import HitRecord from "../Hittable/HitRecord";
+import Utils from "../Utils/Utils";
 import Color from "../Vectors/Color";
 import Ray from "../Vectors/Ray";
 import Vec3 from "../Vectors/Vec3";
@@ -9,6 +10,12 @@ class Dielectric extends Material{
     constructor(refractiveIndex : number){
         super();
         this.refractiveIndex = refractiveIndex;
+    }
+
+    reflectance(cosine : number , refractionIndex : number) : number{
+        let r0 = (1 - refractionIndex) / (1 + refractionIndex);
+        r0 = r0 * r0;
+        return r0 + (1 - r0) * Math.pow((1 - cosine) , 5);
     }
 
     scatter(rIn : Ray , rec : HitRecord , attenuation : Color , scattered : Ray) : boolean{
@@ -25,7 +32,9 @@ class Dielectric extends Material{
         let cannotRefract : boolean = ri * sniTheta > 1;
         let direction : Vec3 = new Vec3(0 , 0 ,0);
         
-        if(cannotRefract){
+        
+
+        if(cannotRefract || this.reflectance(cosTheta, ri) > Utils.randomDouble()){
             direction = Vec3.reflect(unitDirection , rec.normal);
         }else{
             direction = Vec3.refract(unitDirection , rec.normal , ri);
