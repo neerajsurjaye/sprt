@@ -27,6 +27,7 @@ class Camera{
     samplePerPixel: number;
     pixelSampleScale: number;
     maxDepth: number;
+    vfov: number;
     
 
     constructor(){
@@ -34,11 +35,16 @@ class Camera{
         this.aspectRatio = 16 / 9;
         this.imageWidth = 700;
 
+        this.vfov = 50;
+        let theta : number = Utils.degreesToRadians(this.vfov);
+        let h : number= Math.tan(theta / 2);
+        
+
         this.imageHeight = Math.floor(this.imageWidth / this.aspectRatio);
         this.imageHeight = (this.imageHeight < 1) ? 1 : this.imageHeight;
 
         this.focalLength  = 1.0;
-        this.viewPortHeight  = 2;
+        this.viewPortHeight  = 2 * h * this.focalLength;
         this.viewPortWidth = this.viewPortHeight * (this.imageWidth / this.imageHeight); 
         this.cameraCenter = new Vec3(0 , 0 , 0);
 
@@ -59,7 +65,7 @@ class Camera{
         this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
         
         console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
-        this.samplePerPixel = 50;
+        this.samplePerPixel = 25;
         this.pixelSampleScale = 1 / this.samplePerPixel;
         this.maxDepth = 25;
     }

@@ -82,11 +82,11 @@ function main(){
     //world
     let world : HittableList = new HittableList();
     world.add(new Sphere(new Vec3(0 , -100.5, -1) , 100 , materialGround));
-    world.add(new Sphere(new Vec3(-1.5 , 0 , -2) , 0.5 , materialMetal));
-    world.add(new Sphere(new Vec3(0 , 0 , -1) , 0.5 , materialDiffuse));
-    world.add(new Sphere(new Vec3(0.9 , 0 , -1.5) , 0.5 , materialMetalFuzz));
-    world.add(new Sphere(new Vec3(.4 , -0.2 , -.5) , 0.1 , materialDiffuseRed));
-    world.add(new Sphere(new Vec3(-.8 , 0.1 , -1) , 0.3 , materialGlass));
+    world.add(new Sphere(new Vec3(-1 , 0 , -3) , 0.5 , materialMetal));
+    world.add(new Sphere(new Vec3(0 , 0 , -2) , 0.5 , materialDiffuse));
+    world.add(new Sphere(new Vec3(0.9 , 0 , -2) , 0.5 , materialMetalFuzz));
+    world.add(new Sphere(new Vec3(.2 , -0.2 , -1) , 0.1 , materialDiffuseRed));
+    world.add(new Sphere(new Vec3(-1 , 0.1 , -1.5) , 0.3 , materialGlass));
 
 
     let camera : Camera = new Camera();
