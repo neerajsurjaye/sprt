@@ -141,6 +141,13 @@ class Vec3 {
         return v.substract(n.multiply(v.dot(n)).multiply(2));
     }
 
+    static refract(uv : Vec3 , n : Vec3 , etaiOverEtat : number){
+        let cosTheta : number = Math.min(uv.multiply(-1).dot(n) , 1);
+        let rOutPerp : Vec3 = uv.add(n.multiply(cosTheta)).multiply(etaiOverEtat);
+        let rOutParallel : Vec3 = n.multiply(-1 * Math.sqrt(Math.abs(1 - rOutPerp.lengthSquared())));
+        return rOutPerp.add(rOutParallel);
+    }
+
 
 }
 

@@ -32,7 +32,7 @@ class Camera{
     constructor(){
 
         this.aspectRatio = 16 / 9;
-        this.imageWidth = 800;
+        this.imageWidth = 700;
 
         this.imageHeight = Math.floor(this.imageWidth / this.aspectRatio);
         this.imageHeight = (this.imageHeight < 1) ? 1 : this.imageHeight;
@@ -59,9 +59,9 @@ class Camera{
         this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
         
         console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
-        this.samplePerPixel = 200;
+        this.samplePerPixel = 50;
         this.pixelSampleScale = 1 / this.samplePerPixel;
-        this.maxDepth = 50;
+        this.maxDepth = 25;
     }
 
 

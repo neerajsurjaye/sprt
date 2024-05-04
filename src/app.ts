@@ -12,6 +12,7 @@ import Camera from "./Utils/Camera";
 import Material from "./Materials/Material";
 import Lambertian from "./Materials/Lambertian";
 import Metal from "./Materials/Metal";
+import Dielectric from "./Materials/Dielectric";
 
 
 
@@ -74,6 +75,7 @@ function main(){
     let materialDiffuse : Material = new Lambertian(new Color(.5 , .8 , 0));
     let materialGround : Material = new Lambertian(new Color(0.8 , 1 , 0.8));
     let materialDiffuseRed : Material = new Lambertian(new Color(1 , 0 , 0));
+    let materialGlass : Material = new Dielectric(1 / 1.33);
 
 
     
@@ -84,6 +86,8 @@ function main(){
     world.add(new Sphere(new Vec3(0 , 0 , -1) , 0.5 , materialDiffuse));
     world.add(new Sphere(new Vec3(0.9 , 0 , -1.5) , 0.5 , materialMetalFuzz));
     world.add(new Sphere(new Vec3(.4 , -0.2 , -.5) , 0.1 , materialDiffuseRed));
+    world.add(new Sphere(new Vec3(-.5 , 0.1 , -1) , 0.3 , materialGlass));
+
 
     let camera : Camera = new Camera();
     camera.render(world);
