@@ -68,8 +68,9 @@ function main(){
 
     //width / height = 16 / 9 ----> width * 9 = height * 16
 
-    let materialMetal : Material = new Metal(new Color(1 , 1 , 1));
-    
+    let materialMetal : Material = new Metal(new Color(1 , 1 , 1) , 0);
+    let materialMetalFuzz : Material = new Metal(new Color(1 , 1 , 1) , 0.3);
+
     let materialDiffuse : Material = new Lambertian(new Color(.5 , .8 , 0));
     let materialGround : Material = new Lambertian(new Color(0.8 , 1 , 0.8));
     let materialDiffuseRed : Material = new Lambertian(new Color(1 , 0 , 0));
@@ -81,7 +82,7 @@ function main(){
     world.add(new Sphere(new Vec3(0 , -100.5, -1) , 100 , materialGround));
     world.add(new Sphere(new Vec3(-1.5 , 0 , -2) , 0.5 , materialMetal));
     world.add(new Sphere(new Vec3(0 , 0 , -1) , 0.5 , materialDiffuse));
-    world.add(new Sphere(new Vec3(0.9 , 0 , -1.5) , 0.5 , materialMetal));
+    world.add(new Sphere(new Vec3(0.9 , 0 , -1.5) , 0.5 , materialMetalFuzz));
     world.add(new Sphere(new Vec3(.4 , -0.2 , -.5) , 0.1 , materialDiffuseRed));
 
     let camera : Camera = new Camera();

@@ -32,7 +32,7 @@ class Camera{
     constructor(){
 
         this.aspectRatio = 16 / 9;
-        this.imageWidth = 1280;
+        this.imageWidth = 800;
 
         this.imageHeight = Math.floor(this.imageWidth / this.aspectRatio);
         this.imageHeight = (this.imageHeight < 1) ? 1 : this.imageHeight;
