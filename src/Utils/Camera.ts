@@ -33,7 +33,7 @@ class Camera{
     constructor(){
 
         this.aspectRatio = 16 / 9;
-        this.imageWidth = 700;
+        this.imageWidth = 1280;
 
         this.vfov = 50;
         let theta : number = Utils.degreesToRadians(this.vfov);
@@ -65,7 +65,7 @@ class Camera{
         this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
         
         console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
-        this.samplePerPixel = 25;
+        this.samplePerPixel = 100;
         this.pixelSampleScale = 1 / this.samplePerPixel;
         this.maxDepth = 25;
     }
