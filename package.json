@@ -2,15 +2,22 @@
   "name": "sprt",
   "version": "1.0.0",
   "description": "Raytracing engine",
-  "main": "index.js",
+  "main": "build/Electron/index.js",
+
   "scripts": {
     "test": "./index.js",
-    "code" : "npx tsc && node ./build/app.js"
+    "code": "npx tsc && node ./build/app.js",
+    "compile": "tsc && copyfiles -f src/Electron/static/* build/Electron/static/",
+    "start": "npm run compile && electron ."
   },
   "author": "Neeraj Surjaye",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.12.7",
+    "electron": "^30.0.3",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "copyfiles": "^2.4.1"
   }
 }
