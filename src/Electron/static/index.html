@@ -8,7 +8,27 @@
 <body>
     <div>HTML data</div>
     <p id="info"></p>
+    <canvas id="image"></canvas>
 </body>
 
+<script>
+
+    let canvas = document.getElementById("image");
+    let ctx = canvas.getContext("2d");
+
+    
+
+    window.sprt.render().then((res)=>{
+        console.log(res);
+        canvas.style.width = res.width;
+        canvas.style.height = res.height;
+        let palette = ctx.createImageData(res.width , res.height);
+        palette.data.set(new Uint8ClampedArray(res.image));
+        ctx.putImageData(palette , 0 ,0);
+        console.log("set image data " , canvas , palette);
+
+      
+    })
+</script>
 
 </html>

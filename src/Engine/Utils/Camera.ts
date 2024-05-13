@@ -33,7 +33,7 @@ class Camera{
     constructor(){
 
         this.aspectRatio = 16 / 9;
-        this.imageWidth = 1280;
+        this.imageWidth = 400;
 
         this.vfov = 50;
         let theta : number = Utils.degreesToRadians(this.vfov);
@@ -65,13 +65,13 @@ class Camera{
         this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
         
         console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
-        this.samplePerPixel = 100;
+        this.samplePerPixel = 30;
         this.pixelSampleScale = 1 / this.samplePerPixel;
-        this.maxDepth = 25;
+        this.maxDepth = 10;
     }
 
 
-    render(world : Hittable) : void{
+    render_old(world : Hittable) : void{
         
     
         const fileName = "out.ppm";
@@ -112,8 +112,35 @@ class Camera{
 
         writer.write();
 
+    }
+
+    render(world : Hittable) : Object{
+        
+        let image : Array<number> = []
+        
+        for(let j = 0 ; j < this.imageHeight ; j++){
+            console.log(`Lines remaining ${this.imageHeight - j} ----`);
+            for(let i = 0 ; i < this.imageWidth ; i++){
+
+                let pixelColor : Vec3 = new Vec3(0 , 0 , 0);
+                let pixelCenter = this.pixel00Loc.add(this.pixelDeltaU.multiply(i)).add(this.pixelDeltaV.multiply(j));
+
+                //explore the substraction part
+                let rayDirection = pixelCenter.substract(this.cameraCenter);
+                for(let sample = 0 ; sample < this.samplePerPixel; sample++){
+                    let ray:Ray = this.getRay(i , j);
+                    pixelColor = pixelColor.add(this.rayColor(ray , this.maxDepth ,  world));
+                }
+
+                image.push(...Color.writeColorVec(pixelColor.multiply(this.pixelSampleScale)));
+            }
+        }
+
+        return {image : image, width : this.imageWidth , height : this.imageHeight};
+
 
     }
+
 
     //genereates a random vector for antialiasing
     sampleSquare() : Vec3{

@@ -90,7 +90,7 @@ function main(){
 
 
     let camera : Camera = new Camera();
-    camera.render(world);
+    camera.render_old(world);
     
     console.log("Done Rendering :)");
 

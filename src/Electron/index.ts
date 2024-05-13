@@ -1,3 +1,5 @@
+import Core from "../Engine/Core";
+
 const { BrowserWindow, app, ipcMain } = require("electron")
 const path = require('node:path')
 
@@ -18,6 +20,11 @@ app.on("window-all-closed" , ()=>{
 })
 
 app.whenReady().then(()=>{
+    let sprt : Core = new Core();
+
+    ipcMain.handle('render' , ()=>{return sprt.render()})
+
+
     createWindow();
 })
 

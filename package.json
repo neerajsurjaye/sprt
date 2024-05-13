@@ -1,15 +1,17 @@
 {
   "name": "sprt",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Raytracing engine",
   "main": "build/Electron/index.js",
   "scripts": {
     "test": "./index.js",
-    "code": "npx tsc && node ./build/app.js",
+    "code": "npx tsc && node ./build/Engine/app.js",
     "compile": "tsc && copyfiles -f src/Electron/static/* build/Electron/static/",
+    "clone" : "copyfiles -f src/Electron/static/* build/Electron/static/",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
+    
   },
   "author": "Neeraj Surjaye",
   "license": "MIT",

@@ -57,6 +57,27 @@ class Color extends Vec3{
 
         return `${Math.floor(rbyte)} ${Math.floor(gbyte)} ${Math.floor(bbyte)}\n`
     }
+
+    static writeColorVec(col : Vec3) : Array<number>{
+
+        //maps 0->1 to 0->255
+        let r = col.x;
+        let g = col.y;
+        let b = col.z;
+
+        r = this.linearToGamma(r);
+        g = this.linearToGamma(g);
+        b = this.linearToGamma(b);
+
+        let intensity : Interval = new Interval(0, 0.999);
+        let rbyte : number = Math.round(256 * intensity.clamp(r));
+        let gbyte : number = Math.round(256 * intensity.clamp(g));
+        let bbyte : number = Math.round(256 * intensity.clamp(b));
+
+        let color =  new Color(Math.floor(rbyte) , Math.floor(gbyte) , Math.floor(bbyte));
+        color.vec.push(255); //alpha
+        return color.vec;
+    }
 }
 
 export default Color;
