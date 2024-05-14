@@ -10,7 +10,8 @@
     "clone" : "copyfiles -f src/Electron/static/* build/Electron/static/",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "clone-start" : "npm run clone && npm run start"
     
   },
   "author": "Neeraj Surjaye",
