@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+
 </head>
+
+
 <body>
     <div>HTML data</div>
     <p id="info"></p>
@@ -14,18 +19,22 @@
 <script>
 
     let canvas = document.getElementById("image");
-    let ctx = canvas.getContext("2d");
 
     
 
     window.sprt.render().then((res)=>{
-        console.log(res);
-        canvas.style.width = res.width;
-        canvas.style.height = res.height;
-        let palette = ctx.createImageData(res.width , res.height);
-        palette.data.set(new Uint8ClampedArray(res.image));
+        canvas.style.width = res.width + "px";
+        canvas.style.height = res.height + "px"; 
+        canvas.width = res.width;
+        canvas.height = res.height;
+
+        let ctx = canvas.getContext("2d");
+
+        console.log(res.width , ctx);
+
+        let palette = new ImageData(new Uint8ClampedArray(res.image) , res.width , res.height);
         ctx.putImageData(palette , 0 ,0);
-        console.log("set image data " , canvas , palette);
+        console.log("set image data " , canvas , palette, res);
 
       
     })

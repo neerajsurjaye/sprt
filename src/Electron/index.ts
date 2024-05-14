@@ -24,7 +24,6 @@ app.whenReady().then(()=>{
 
     ipcMain.handle('render' , ()=>{return sprt.render()})
 
-
     createWindow();
 })
 

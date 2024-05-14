@@ -45,6 +45,10 @@ class Core{
     render() : Object{
         return this.camera.render(this.world);
     }
+
+    renderImage() : void {
+        return this.camera.render_old(this.world);
+    }
 }
 
 export default Core;

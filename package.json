@@ -6,13 +6,13 @@
   "scripts": {
     "test": "./index.js",
     "code": "npx tsc && node ./build/Engine/app.js",
-    "compile": "tsc && copyfiles -f src/Electron/static/* build/Electron/static/",
-    "clone" : "copyfiles -f src/Electron/static/* build/Electron/static/",
+    "compile": "tsc && copyfiles -f npx run clone",
+    "clone": "cpx src/Electron/static/**/* build/Electron/static/",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "clone-start" : "npm run clone && npm run start"
-    
+    "clone-start": "npm run clone && npm run start",
+    "compile-clone": "npm run compile && npm run clone"
   },
   "author": "Neeraj Surjaye",
   "license": "MIT",
@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "copyfiles": "^2.4.1",
+    "cpx2": "^7.0.1",
     "electron-squirrel-startup": "^1.0.0"
   }
 }
