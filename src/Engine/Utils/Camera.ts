@@ -28,6 +28,12 @@ class Camera{
     pixelSampleScale: number;
     maxDepth: number;
     vfov: number;
+    lookFrom: Vec3;
+    lookat: Vec3;
+    vup: Vec3;
+    u : Vec3;
+    v : Vec3;
+    w : Vec3;
     
 
     constructor(){
@@ -35,7 +41,11 @@ class Camera{
         this.aspectRatio = 16 / 9;
         this.imageWidth = 400;
 
-        this.vfov = 50;
+        this.lookFrom = new Vec3(-1 , 2 , 1);
+        this.lookat = new Vec3(0 , 0 , -2);
+        this.vup = new Vec3(0, 1 , 0);  
+
+        this.vfov = 20;
         let theta : number = Utils.degreesToRadians(this.vfov);
         let h : number= Math.tan(theta / 2);
         
@@ -43,31 +53,37 @@ class Camera{
         this.imageHeight = Math.floor(this.imageWidth / this.aspectRatio);
         this.imageHeight = (this.imageHeight < 1) ? 1 : this.imageHeight;
 
-        this.focalLength  = 1.0;
+        this.focalLength  = (this.lookFrom.substract(this.lookat)).length();
         this.viewPortHeight  = 2 * h * this.focalLength;
         this.viewPortWidth = this.viewPortHeight * (this.imageWidth / this.imageHeight); 
-        this.cameraCenter = new Vec3(0 , 0 , 0);
+        this.cameraCenter = this.lookFrom;
+
+        this.w = this.lookFrom.substract(this.lookat).unitVector();
+        this.u = this.vup.cross(this.w).unitVector();
+        this.v = this.w.cross(this.u);
+
 
         console.log(`viewport w / h : ${this.viewPortWidth} , ${this.viewPortHeight}`);
 
-        this.viewPortU = new Vec3(this.viewPortWidth , 0 , 0);
-        this.viewPortV  = new Vec3(0 , -this.viewPortHeight , 0);
+        this.viewPortU = this.u.multiply(this.viewPortWidth);
+        this.viewPortV  = this.v.multiply(-1).multiply(this.viewPortHeight);
 
         this.pixelDeltaU   = this.viewPortU.divide(this.imageWidth);
         this.pixelDeltaV   = this.viewPortV.divide(this.imageHeight);
 
         console.log(`PixelDetlas : ${this.pixelDeltaU.vec} , ${this.pixelDeltaV.vec}`);
 
-        this.viewPortUpperLeft = this.cameraCenter.substract(new Vec3(0 , 0 , this.focalLength)).substract(this.viewPortU.divide(2)).substract(this.viewPortV.divide(2));
+                                                            //why multiply focallength with this.w
+        this.viewPortUpperLeft = this.cameraCenter.substract(new Vec3(0 , 0 , this.focalLength).multiplyVec(this.w)).substract(this.viewPortU.divide(2)).substract(this.viewPortV.divide(2));
 
         console.log(`ViewPortUpperLeft : ${this.viewPortUpperLeft.vec} `);
 
         this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
         
         console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
-        this.samplePerPixel = 30;
+        this.samplePerPixel = 40;
         this.pixelSampleScale = 1 / this.samplePerPixel;
-        this.maxDepth = 10;
+        this.maxDepth = 8;
     }
 
 

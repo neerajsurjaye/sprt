@@ -36,6 +36,9 @@ class Core{
         this.world.add(new Sphere(new Vec3(.2 , -0.2 , -1) , 0.1 , materialDiffuseRed));
         this.world.add(new Sphere(new Vec3(-1 , 0.1 , -1.5) , 0.3 , materialGlass));
 
+        
+
+
     }
 
     add(object : Hittable){

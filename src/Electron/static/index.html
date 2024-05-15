@@ -11,33 +11,13 @@
 
 
 <body>
-    <div>HTML data</div>
+    <div>Ray tracer demo</div>
     <p id="info"></p>
     <canvas id="image"></canvas>
 </body>
 
-<script>
 
-    let canvas = document.getElementById("image");
 
-    
-
-    window.sprt.render().then((res)=>{
-        canvas.style.width = res.width + "px";
-        canvas.style.height = res.height + "px"; 
-        canvas.width = res.width;
-        canvas.height = res.height;
-
-        let ctx = canvas.getContext("2d");
-
-        console.log(res.width , ctx);
-
-        let palette = new ImageData(new Uint8ClampedArray(res.image) , res.width , res.height);
-        ctx.putImageData(palette , 0 ,0);
-        console.log("set image data " , canvas , palette, res);
-
-      
-    })
-</script>
+<script src="./js/index.js"></script>
 
 </html>
