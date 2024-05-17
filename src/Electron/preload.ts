@@ -1,3 +1,5 @@
+import { channel } from "diagnostics_channel";
+
 const { contextBridge  , ipcRenderer} = require('electron');
 
 contextBridge.exposeInMainWorld('versions', {
@@ -5,6 +7,10 @@ contextBridge.exposeInMainWorld('versions', {
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
 })
+
+contextBridge.exposeInMainWorld('api' , {
+	on : (channel: any , func : any) => {ipcRenderer.on(channel , func)}
+});
 
 contextBridge.exposeInMainWorld('sprt', {
   render : async ()=>{

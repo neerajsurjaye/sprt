@@ -2,9 +2,10 @@ import Core from "../Engine/Core";
 
 const { BrowserWindow, app, ipcMain } = require("electron")
 const path = require('node:path')
+let win : any;
 
 const createWindow  = () : void =>{
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 800,
         height : 600,
         webPreferences : {
@@ -20,10 +21,11 @@ app.on("window-all-closed" , ()=>{
 })
 
 app.whenReady().then(()=>{
-    let sprt : Core = new Core();
-
-    ipcMain.handle('render' , ()=>{return sprt.render()})
 
     createWindow();
+
+    let sprt : Core = new Core(win);
+    ipcMain.handle('render' , ()=>{return sprt.render()})
+
 })
 
