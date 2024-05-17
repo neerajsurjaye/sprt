@@ -7,14 +7,14 @@ import Color from "../Vectors/Color";
 import writer from "./Writer";
 import Interval from "./Interval";
 import Writer from "./Writer";
-import { write } from "fs";
+import { utimes, write } from "fs";
 
 class Camera{
 
     aspectRatio : number;
     imageWidth : number;
     imageHeight : number;    
-    focalLength : number;
+    // focalLength : number;
     viewPortHeight : number;
     viewPortWidth : number;
     cameraCenter : Vec3;
@@ -34,34 +34,47 @@ class Camera{
     u : Vec3;
     v : Vec3;
     w : Vec3;
+    defocusAngle: number;
+    focalDist: number;
+    defocusDistU : Vec3;
+    defocusDiscV : Vec3;
+    window : any;
     
 
     constructor(){
 
+
+
         this.aspectRatio = 16 / 9;
         this.imageWidth = 400;
 
-        this.lookFrom = new Vec3(-1 , 2 , 1);
+        this.lookFrom = new Vec3(-1 , 0.5 , 1);
         this.lookat = new Vec3(0 , 0 , -2);
         this.vup = new Vec3(0, 1 , 0);  
 
-        this.vfov = 20;
+        this.vfov = 45;
+        this.defocusAngle = .5;
+        this.samplePerPixel = 100;
+        this.maxDepth = 8;
+
+        //initalize()
         let theta : number = Utils.degreesToRadians(this.vfov);
-        let h : number= Math.tan(theta / 2);
-        
+        let h : number = Math.tan(theta / 2);
+        this.focalDist = (this.lookFrom.substract(this.lookat)).length();;
+
+
 
         this.imageHeight = Math.floor(this.imageWidth / this.aspectRatio);
         this.imageHeight = (this.imageHeight < 1) ? 1 : this.imageHeight;
 
-        this.focalLength  = (this.lookFrom.substract(this.lookat)).length();
-        this.viewPortHeight  = 2 * h * this.focalLength;
-        this.viewPortWidth = this.viewPortHeight * (this.imageWidth / this.imageHeight); 
         this.cameraCenter = this.lookFrom;
+        // this.focalLength  = (this.lookFrom.substract(this.lookat)).length();
+        this.viewPortHeight  = 2 * h * this.focalDist;
+        this.viewPortWidth = this.viewPortHeight * (this.imageWidth / this.imageHeight); 
 
         this.w = this.lookFrom.substract(this.lookat).unitVector();
         this.u = this.vup.cross(this.w).unitVector();
         this.v = this.w.cross(this.u);
-
 
         console.log(`viewport w / h : ${this.viewPortWidth} , ${this.viewPortHeight}`);
 
@@ -74,16 +87,66 @@ class Camera{
         console.log(`PixelDetlas : ${this.pixelDeltaU.vec} , ${this.pixelDeltaV.vec}`);
 
                                                             //why multiply focallength with this.w
-        this.viewPortUpperLeft = this.cameraCenter.substract(new Vec3(0 , 0 , this.focalLength).multiplyVec(this.w)).substract(this.viewPortU.divide(2)).substract(this.viewPortV.divide(2));
+        this.viewPortUpperLeft = this.cameraCenter.substract(this.w.multiply(this.focalDist)).substract(this.viewPortU.divide(2)).substract(this.viewPortV.divide(2));
 
         console.log(`ViewPortUpperLeft : ${this.viewPortUpperLeft.vec} `);
 
         this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
         
         console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
-        this.samplePerPixel = 40;
         this.pixelSampleScale = 1 / this.samplePerPixel;
-        this.maxDepth = 8;
+
+        let defocusRadius = this.focalDist * Math.tan(Utils.degreesToRadians(this.defocusAngle / 2));
+        this.defocusDistU = this.u.multiply(defocusRadius);
+        this.defocusDiscV = this.v.multiply(defocusRadius);
+        this.window = null;
+
+    }
+
+    //recalculates the values
+    initialize(){
+        let theta : number = Utils.degreesToRadians(this.vfov);
+        let h : number = Math.tan(theta / 2);
+        this.focalDist = (this.lookFrom.substract(this.lookat)).length();;
+
+
+
+        this.imageHeight = Math.floor(this.imageWidth / this.aspectRatio);
+        this.imageHeight = (this.imageHeight < 1) ? 1 : this.imageHeight;
+
+        this.cameraCenter = this.lookFrom;
+        // this.focalLength  = (this.lookFrom.substract(this.lookat)).length();
+        this.viewPortHeight  = 2 * h * this.focalDist;
+        this.viewPortWidth = this.viewPortHeight * (this.imageWidth / this.imageHeight); 
+
+        this.w = this.lookFrom.substract(this.lookat).unitVector();
+        this.u = this.vup.cross(this.w).unitVector();
+        this.v = this.w.cross(this.u);
+
+        console.log(`viewport w / h : ${this.viewPortWidth} , ${this.viewPortHeight}`);
+
+        this.viewPortU = this.u.multiply(this.viewPortWidth);
+        this.viewPortV  = this.v.multiply(-1).multiply(this.viewPortHeight);
+
+        this.pixelDeltaU   = this.viewPortU.divide(this.imageWidth);
+        this.pixelDeltaV   = this.viewPortV.divide(this.imageHeight);
+
+        console.log(`PixelDetlas : ${this.pixelDeltaU.vec} , ${this.pixelDeltaV.vec}`);
+
+                                                            //why multiply focallength with this.w
+        this.viewPortUpperLeft = this.cameraCenter.substract(this.w.multiply(this.focalDist)).substract(this.viewPortU.divide(2)).substract(this.viewPortV.divide(2));
+
+        console.log(`ViewPortUpperLeft : ${this.viewPortUpperLeft.vec} `);
+
+        this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
+        
+        console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
+        this.pixelSampleScale = 1 / this.samplePerPixel;
+
+        let defocusRadius = this.focalDist * Math.tan(Utils.degreesToRadians(this.defocusAngle / 2));
+        this.defocusDistU = this.u.multiply(defocusRadius);
+        this.defocusDiscV = this.v.multiply(defocusRadius);
+
     }
 
 
@@ -150,6 +213,11 @@ class Camera{
 
                 image.push(...Color.writeColorVec(pixelColor.multiply(this.pixelSampleScale)));
             }
+            
+            if(this.window){
+                this.window.webContents.send('image-rendered' , {image : image, width : this.imageWidth , height : j + 1});
+            }
+            
         }
 
         return {image : image, width : this.imageWidth , height : this.imageHeight};
@@ -167,10 +235,15 @@ class Camera{
     getRay(i : number , j : number) : Ray{
         let offSet : Vec3 = this.sampleSquare();
         let pixelSample : Vec3 = this.pixel00Loc.add(this.pixelDeltaU.multiply(offSet.x + i)).add(this.pixelDeltaV.multiply(offSet.y + j));
-        let rayOrigin : Vec3 = this.cameraCenter;
+        let rayOrigin : Vec3 = (this.defocusAngle <= 0) ? this.cameraCenter : this.defocusDiscSample();
         let rayDirection : Vec3 = pixelSample.substract(rayOrigin);
 
         return new Ray(rayOrigin , rayDirection);
+    }
+
+    defocusDiscSample() : Vec3{
+        let p : Vec3 = Vec3.randomInUnitDisc();
+        return this.cameraCenter.add(this.defocusDistU.multiply(p.x)).add(this.defocusDiscV.multiply(p.y));
     }
 
     rayColor (ray : Ray , depth : number , world : Hittable) : Vec3{

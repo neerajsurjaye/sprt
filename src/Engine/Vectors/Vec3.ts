@@ -148,6 +148,13 @@ class Vec3 {
         return rOutPerp.add(rOutParallel);
     }
 
+    static randomInUnitDisc() : Vec3{
+        while(true){
+            let p : Vec3 = new Vec3(Utils.randomDoubleRange(-1 , 1) , Utils.randomDoubleRange(-1 , 1) , 0);
+            if(p.lengthSquared() < 1) return p;
+        }
+    }
+
 
 }
 

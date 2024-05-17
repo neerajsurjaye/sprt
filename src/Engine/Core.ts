@@ -13,10 +13,12 @@ class Core{
 
     camera : Camera;
     world : HittableList;
+    window : any;
 
-    constructor(){
+    constructor(win : any){
         this.camera = new Camera();
         this.world = new HittableList();
+        this.camera.window = win;
 
         //sample world
         let materialMetal : Material = new Metal(new Color(1 , 1 , 1) , 0);
@@ -36,7 +38,8 @@ class Core{
         this.world.add(new Sphere(new Vec3(.2 , -0.2 , -1) , 0.1 , materialDiffuseRed));
         this.world.add(new Sphere(new Vec3(-1 , 0.1 , -1.5) , 0.3 , materialGlass));
 
-        
+        this.camera.samplePerPixel = 50;
+        this.camera.initialize();
 
 
     }
