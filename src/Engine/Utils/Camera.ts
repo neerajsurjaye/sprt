@@ -39,6 +39,7 @@ class Camera{
     defocusDistU : Vec3;
     defocusDiscV : Vec3;
     window : any;
+    cb : Function | null | undefined;
     
 
     constructor(){
@@ -100,6 +101,7 @@ class Camera{
         this.defocusDistU = this.u.multiply(defocusRadius);
         this.defocusDiscV = this.v.multiply(defocusRadius);
         this.window = null;
+        this.cb = null;
 
     }
 
@@ -214,10 +216,13 @@ class Camera{
                 image.push(...Color.writeColorVec(pixelColor.multiply(this.pixelSampleScale)));
             }
             
-            if(this.window){
-                this.window.webContents.send('image-rendered' , {image : image, width : this.imageWidth , height : j + 1});
-            }
+            // if(this.window){
+            //     this.window.webContents.send('image-rendered' , {image : image, width : this.imageWidth , height : j + 1});
+            // }
             
+            if(this.cb){
+                this.cb('image-rendered' , {image : image, width : this.imageWidth , height : j + 1});
+            }
         }
 
         return {image : image, width : this.imageWidth , height : this.imageHeight};

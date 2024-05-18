@@ -5,7 +5,7 @@
   "main": "build/Electron/index.js",
   "scripts": {
     "test": "./index.js",
-    "code": "npx tsc && node ./build/Engine/app.js",
+    "local": "npx tsc && node ./build/Engine/app.js",
     "compile": "tsc && copyfiles -f npx run clone",
     "clone": "cpx src/Electron/static/**/* build/Electron/static/",
     "start": "electron-forge start",

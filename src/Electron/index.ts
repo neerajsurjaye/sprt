@@ -24,8 +24,16 @@ app.whenReady().then(()=>{
 
     createWindow();
 
-    let sprt : Core = new Core(win);
+    let renderImage = (operation : string, message : any)=>{
+        
+        win.webContents.send(operation , {image : message.image, width : message.width , height : message.height});
+    }
+
+    let sprt : Core = new Core(renderImage);
     ipcMain.handle('render' , ()=>{return sprt.render()})
+    ipcMain.handle('refresh' , (config : any)=>{
+        sprt.updateConfig(config);
+    })
 
 })
 
