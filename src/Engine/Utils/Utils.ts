@@ -7,6 +7,7 @@ import Material from "../Materials/Material";
 import Metal from "../Materials/Metal";
 import Color from "../Vectors/Color";
 import Vec3 from "../Vectors/Vec3";
+import Camera from "./Camera";
 
 class Utils{
     static _infinity : number = Number.POSITIVE_INFINITY;
@@ -32,7 +33,7 @@ class Utils{
         return min + (max - min) * this.randomDouble();
     }
 
-    static updateWorld(config : Array<any> , world : HittableList){
+    static configWorld(config : Array<any> , world : HittableList){
         world.clear();
 
 
@@ -75,6 +76,23 @@ class Utils{
 
         return new Lambertian(new Color(1 , 0 , 0));
 
+    }
+
+    static configCamera(cameraConfig : any , camera : Camera) : void {
+        camera.aspectRatio = cameraConfig.aspectRatio ? cameraConfig.aspectRatio : 16/9;
+        camera.imageWidth = cameraConfig.imageWidth ? cameraConfig.imageWidth : 400;
+        let lookFrom = cameraConfig.lookFrom ? cameraConfig.lookFrom : {x : 0 , y : 0 , z : 0};
+        let lookAt = cameraConfig.lookAt ? cameraConfig.lookAt : {x: 1 , y : 0 , z : 0};
+
+        camera.lookFrom = new Vec3(lookFrom.x , lookFrom.y , lookFrom.z);
+        camera.lookAt = new Vec3(lookAt.x , lookAt.y , lookAt.z);
+
+        
+        camera.vfov = cameraConfig.vfov ? cameraConfig.vfov : 45;
+        camera.defocusAngle = cameraConfig.defocusAngle >= 0 ? cameraConfig.defocusAngle : 2;
+        camera.samplePerPixel = cameraConfig.samplePerPixel ? cameraConfig.samplePerPixel : 20;
+        camera.maxDepth = cameraConfig.maxDepth ? cameraConfig.maxDepth : 4;
+        camera.initialize();
     }
 
     

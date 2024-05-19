@@ -29,7 +29,7 @@ class Camera{
     maxDepth: number;
     vfov: number;
     lookFrom: Vec3;
-    lookat: Vec3;
+    lookAt: Vec3;
     vup: Vec3;
     u : Vec3;
     v : Vec3;
@@ -50,7 +50,7 @@ class Camera{
         this.imageWidth = 400;
 
         this.lookFrom = new Vec3(-1 , 0.5 , 1);
-        this.lookat = new Vec3(0 , 0 , -2);
+        this.lookAt = new Vec3(0 , 0 , -2);
         this.vup = new Vec3(0, 1 , 0);  
 
         this.vfov = 45;
@@ -61,7 +61,7 @@ class Camera{
         //initalize()
         let theta : number = Utils.degreesToRadians(this.vfov);
         let h : number = Math.tan(theta / 2);
-        this.focalDist = (this.lookFrom.substract(this.lookat)).length();;
+        this.focalDist = (this.lookFrom.substract(this.lookAt)).length();;
 
 
 
@@ -73,7 +73,7 @@ class Camera{
         this.viewPortHeight  = 2 * h * this.focalDist;
         this.viewPortWidth = this.viewPortHeight * (this.imageWidth / this.imageHeight); 
 
-        this.w = this.lookFrom.substract(this.lookat).unitVector();
+        this.w = this.lookFrom.substract(this.lookAt).unitVector();
         this.u = this.vup.cross(this.w).unitVector();
         this.v = this.w.cross(this.u);
 
@@ -109,7 +109,7 @@ class Camera{
     initialize(){
         let theta : number = Utils.degreesToRadians(this.vfov);
         let h : number = Math.tan(theta / 2);
-        this.focalDist = (this.lookFrom.substract(this.lookat)).length();;
+        this.focalDist = (this.lookFrom.substract(this.lookAt)).length();;
 
 
 
@@ -121,7 +121,7 @@ class Camera{
         this.viewPortHeight  = 2 * h * this.focalDist;
         this.viewPortWidth = this.viewPortHeight * (this.imageWidth / this.imageHeight); 
 
-        this.w = this.lookFrom.substract(this.lookat).unitVector();
+        this.w = this.lookFrom.substract(this.lookAt).unitVector();
         this.u = this.vup.cross(this.w).unitVector();
         this.v = this.w.cross(this.u);
 

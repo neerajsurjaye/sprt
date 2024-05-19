@@ -52,16 +52,16 @@ class Core{
         this.updateConfig({world : [
             {
                 objectType : 'sphere',
-                location : {x : 0 , y : 0 , z : -2},
+                location : {x : -2 , y : 1 , z : -2},
                 radius : 1,
                 material : {
                     materialType : 'lambertian',
-                    color : {r : 1 , g : 0.5 , b : .2}
+                    color : {r : 0.2 , g : 0.9 , b : .2}
                 }
             },
             {
                 objectType : 'sphere',
-                location : {x : -1 , y : 0.1 , z : -1.5},
+                location : {x : -1 , y : 1 , z : 1},
                 radius : 1,
                 material : {
                     materialType : 'dielectric',
@@ -70,17 +70,37 @@ class Core{
             },
             {
                 objectType : 'sphere',
-                location : {x : 1 , y : 0.8 , z : -1.5},
-                radius : 0.5,
+                location : {x : -6 , y : 4 , z : 0},
+                radius : 4,
                 material : {
                     materialType : 'metal',
-                    color : {r : 1 , g : 0.5 , b : .2},
+                    color : {r : 0.2 , g : .3 , b : 1},
                     fuzz : 0
                 }
 
-            }
-        ] , camera : {}});
+            },
+            {
+                objectType : 'sphere',
+                location : {x : 0 , y : -10000 , z : 0},
+                radius : 10000,
+                material : {
+                    materialType : 'lambertian',
+                    color : {r : 1 , g : 0.2 , b : .2}
+                }
+            },
+        ] , camera : {
+            aspectRatio : 16 / 9,
+            imageWidth : 1280,
+            lookFrom : {x : 5 , y : .5 , z : 0},
+            lookAt : {x : 0 , y : 1 , z : 0},
+            vfov : 45,
+            samplePerPixel : 200,
+            defocusAngle : 0,
+            maxDepth : 8
+        }});
 
+        console.log(this.camera);
+        
         return this.camera.render(this.world);
     }
 
@@ -89,8 +109,8 @@ class Core{
     }
 
     updateConfig(config : any) : void{
-        Utils.updateWorld(config.world , this.world);
-        // Utils.upadteCamera(config.camera , this.camera);
+        Utils.configWorld(config.world , this.world);
+        Utils.configCamera(config.camera , this.camera);
     }   
 }
 
