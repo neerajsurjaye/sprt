@@ -77,7 +77,6 @@ class Camera{
         this.u = this.vup.cross(this.w).unitVector();
         this.v = this.w.cross(this.u);
 
-        console.log(`viewport w / h : ${this.viewPortWidth} , ${this.viewPortHeight}`);
 
         this.viewPortU = this.u.multiply(this.viewPortWidth);
         this.viewPortV  = this.v.multiply(-1).multiply(this.viewPortHeight);
@@ -85,16 +84,13 @@ class Camera{
         this.pixelDeltaU   = this.viewPortU.divide(this.imageWidth);
         this.pixelDeltaV   = this.viewPortV.divide(this.imageHeight);
 
-        console.log(`PixelDetlas : ${this.pixelDeltaU.vec} , ${this.pixelDeltaV.vec}`);
 
                                                             //why multiply focallength with this.w
         this.viewPortUpperLeft = this.cameraCenter.substract(this.w.multiply(this.focalDist)).substract(this.viewPortU.divide(2)).substract(this.viewPortV.divide(2));
 
-        console.log(`ViewPortUpperLeft : ${this.viewPortUpperLeft.vec} `);
 
         this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
         
-        console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
         this.pixelSampleScale = 1 / this.samplePerPixel;
 
         let defocusRadius = this.focalDist * Math.tan(Utils.degreesToRadians(this.defocusAngle / 2));
@@ -125,7 +121,6 @@ class Camera{
         this.u = this.vup.cross(this.w).unitVector();
         this.v = this.w.cross(this.u);
 
-        console.log(`viewport w / h : ${this.viewPortWidth} , ${this.viewPortHeight}`);
 
         this.viewPortU = this.u.multiply(this.viewPortWidth);
         this.viewPortV  = this.v.multiply(-1).multiply(this.viewPortHeight);
@@ -133,16 +128,13 @@ class Camera{
         this.pixelDeltaU   = this.viewPortU.divide(this.imageWidth);
         this.pixelDeltaV   = this.viewPortV.divide(this.imageHeight);
 
-        console.log(`PixelDetlas : ${this.pixelDeltaU.vec} , ${this.pixelDeltaV.vec}`);
 
                                                             //why multiply focallength with this.w
         this.viewPortUpperLeft = this.cameraCenter.substract(this.w.multiply(this.focalDist)).substract(this.viewPortU.divide(2)).substract(this.viewPortV.divide(2));
 
-        console.log(`ViewPortUpperLeft : ${this.viewPortUpperLeft.vec} `);
 
         this.pixel00Loc = this.viewPortUpperLeft.add(this.pixelDeltaU.add(this.pixelDeltaV).multiply(0.5));
         
-        console.log(`pixel00Loc : ${this.pixel00Loc.vec}`);
         this.pixelSampleScale = 1 / this.samplePerPixel;
 
         let defocusRadius = this.focalDist * Math.tan(Utils.degreesToRadians(this.defocusAngle / 2));

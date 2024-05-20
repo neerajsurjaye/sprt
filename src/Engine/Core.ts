@@ -90,16 +90,15 @@ class Core{
             },
         ] , camera : {
             aspectRatio : 16 / 9,
-            imageWidth : 1280,
+            imageWidth : 400,
             lookFrom : {x : 5 , y : .5 , z : 0},
             lookAt : {x : 0 , y : 1 , z : 0},
             vfov : 45,
-            samplePerPixel : 200,
+            samplePerPixel : 20,
             defocusAngle : 0,
             maxDepth : 8
         }});
 
-        console.log(this.camera);
         
         return this.camera.render(this.world);
     }
