@@ -21,9 +21,11 @@ let canvas = document.getElementById("image");
 // })
 
 let addObject = document.getElementById('add-object');
-let configBody = document.getElementById('config-body');
+
 
 addObject.addEventListener('click' , ()=>{
+
+    //todo use local create element
     let lastChild = null;
     let objectForm = document.createElement("form");
     objectForm.classList.add('objectForm');
@@ -39,7 +41,6 @@ addObject.addEventListener('click' , ()=>{
 
     objectTypes.addEventListener('change' , (event)=>{
 
-        console.log({lastChild});
         if(lastChild != null) objectForm.removeChild(lastChild);
 
         let objectParamsForm = generateObjectParams(event.target.value);
@@ -55,39 +56,28 @@ addObject.addEventListener('click' , ()=>{
     configBody.appendChild(objectForm);
 })
 
+
+
 let generateObjectParams = (objectType)=>{
 
     if(objectType == 'sphere'){
 
-        let objectParams = document.createElement('div');
+        let objectParams = createElement('div' , {class : 'objectParams'});
 
-        let labelLoc = document.createElement('label');
-        labelLoc.textContent = 'Location';
+        let labelLoc = createElement('label' , {textContent : 'Location'});
 
-        let labelX = document.createElement('label');
-        labelX.textContent = 'x';
-        let inputX = document.createElement('input');
-        inputX.type = 'number';
-        inputX.value = 0;
+        let labelX = createElement('label' , {textContent : 'x'})
+        let inputX = createElement('input' , {type : 'number' , value : 0 , class : 'x' , name : 'locx'});
 
-        let labelY = document.createElement('label');
-        labelY.textContent = 'y';
-        let inputY = document.createElement('input');
-        inputY.type = 'number';
-        inputY.value = 0;
+        let labelY = createElement('label' , {textContent : 'y'})
+        let inputY = createElement('input' , {type : 'number' , value : 0 , class : 'y' , name : 'locy'});
 
-        let labelZ = document.createElement('label');
-        labelZ.textContent = 'z';
-        let inputZ = document.createElement('input');
-        inputZ.type = 'number';
-        inputZ.value = 0;
+        let labelZ = createElement('label' , {textContent : 'z'})
+        let inputZ = createElement('input' , {type : 'number' , value : 0 , class : 'z' , name : 'locz'});
 
+        let labelRadius = createElement('label' , {textContent : 'Radius'});
+        let inputRadius = createElement('input' , {value : 1 , name : 'radius'});
 
-        let labelRadius = document.createElement('label');
-        labelRadius.textContent = 'Radius';
-
-        let inputRadius = document.createElement('input');
-        inputRadius.value = 1;
 
         objectParams.appendChild(labelLoc);
         objectParams.appendChild(labelX);
@@ -106,4 +96,57 @@ let generateObjectParams = (objectType)=>{
     }
 
     return null;
+}
+
+let generateConfigJson = ()=>{
+    let configBody = document.getElementById('config-body');
+
+    let childs = [...configBody.children];
+    let world = [];
+
+    for(let objIndex in childs){
+
+        let objInput = childs[objIndex];
+        let objParamsInput = objInput.querySelector('.objectParams');
+
+        let objConfig = {};
+        for(let elementIndex in objParamsInput.children){
+
+            let element = objParamsInput.children[elementIndex];
+
+            if(element.tagName === "INPUT"){
+                objConfig[element.getAttribute('name')] = element.value;
+            }
+        }        
+
+        console.log({objConfig});
+        world.push(objConfig);
+
+    }
+
+    return world;
+
+}
+
+
+function createElement(tag, option = {}){
+
+    let element = document.createElement(tag);
+
+    for(const [key , value] of Object.entries(option)){
+        if(key === 'textContent'){
+            element.textContent = value;
+        }else if(key === 'value'){
+            element.value = value
+        }else{
+            element.setAttribute(key , value);
+        }
+    }
+
+    if(tag === 'input') element.addEventListener('change' , ()=>{
+        console.log(generateConfigJson());
+    })
+
+    return element;
+
 }

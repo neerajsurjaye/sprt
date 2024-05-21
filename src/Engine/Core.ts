@@ -52,7 +52,9 @@ class Core{
         this.updateConfig({world : [
             {
                 objectType : 'sphere',
-                location : {x : -2 , y : 1 , z : -2},
+                locx : -2,
+                locy : 1,
+                locz : -2,
                 radius : 1,
                 material : {
                     materialType : 'lambertian',
@@ -61,7 +63,9 @@ class Core{
             },
             {
                 objectType : 'sphere',
-                location : {x : -1 , y : 1 , z : 1},
+                locx : -1,
+                locy : 1,
+                locz : 1,
                 radius : 1,
                 material : {
                     materialType : 'dielectric',
@@ -70,7 +74,9 @@ class Core{
             },
             {
                 objectType : 'sphere',
-                location : {x : -6 , y : 4 , z : 0},
+                locx : -6,
+                locy : 4,
+                locz : 0,
                 radius : 4,
                 material : {
                     materialType : 'metal',
@@ -81,7 +87,10 @@ class Core{
             },
             {
                 objectType : 'sphere',
-                location : {x : 0 , y : -10000 , z : 0},
+                // location : {x : 0 , y : -10000 , z : 0},
+                locx : 0,
+                locy : -10000,
+                locz : 0,
                 radius : 10000,
                 material : {
                     materialType : 'lambertian',

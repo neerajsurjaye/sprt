@@ -49,8 +49,8 @@ class Utils{
     static createObject(objectConfig : any) : Hittable{
 
         if(objectConfig.objectType == 'sphere'){
-            let objLoc = objectConfig.location;
-            return new Sphere(new Vec3(objLoc.x , objLoc.y , objLoc.z) , objectConfig.radius , this.createMaterial(objectConfig.material));
+            // let objLoc = objectConfig.location;
+            return new Sphere(new Vec3(objectConfig.locx , objectConfig.locy , objectConfig.locz) , objectConfig.radius , this.createMaterial(objectConfig.material));
         }
 
         
