@@ -35,6 +35,9 @@ class Utils{
 
     static configWorld(config : Array<any> , world : HittableList){
         world.clear();
+        console.log(config);
+        
+        if(!config) return;
 
 
         for(let i : number = 0 ; i < config.length ; i++){
@@ -59,6 +62,10 @@ class Utils{
     }
 
     static createMaterial(materialConfig : any) : Material{
+
+        if(!materialConfig){
+            return new Lambertian(new Color(1 , 0 , 0));
+        }
 
         if(materialConfig.materialType == 'lambertian'){
             let matColor = materialConfig.color;

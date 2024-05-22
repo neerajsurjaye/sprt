@@ -21,7 +21,7 @@ let canvas = document.getElementById("image");
 // })
 
 let addObject = document.getElementById('add-object');
-
+let configBody = document.getElementById('config-body');
 
 addObject.addEventListener('click' , ()=>{
 
@@ -32,6 +32,7 @@ addObject.addEventListener('click' , ()=>{
 
     let objectTypes = document.createElement('select');
     objectTypes.classList.add('objectTypes');
+    objectTypes.setAttribute('name' , 'objectType');
 
     let objectNone = new Option('none' , 'none');
     objectTypes.add(objectNone);
@@ -103,6 +104,7 @@ let generateConfigJson = ()=>{
 
     let childs = [...configBody.children];
     let world = [];
+    let config = {};
 
     for(let objIndex in childs){
 
@@ -110,21 +112,26 @@ let generateConfigJson = ()=>{
         let objParamsInput = objInput.querySelector('.objectParams');
 
         let objConfig = {};
+        let objectName = document.querySelector('.objectTypes');
+        objConfig[objectName.getAttribute('name')] = objectName.value;
+
         for(let elementIndex in objParamsInput.children){
 
             let element = objParamsInput.children[elementIndex];
 
+            console.log(element.tagName);
             if(element.tagName === "INPUT"){
                 objConfig[element.getAttribute('name')] = element.value;
             }
+            
         }        
 
-        console.log({objConfig});
         world.push(objConfig);
 
     }
 
-    return world;
+    config['world'] = world;
+    return config;
 
 }
 
@@ -144,7 +151,19 @@ function createElement(tag, option = {}){
     }
 
     if(tag === 'input') element.addEventListener('change' , ()=>{
-        console.log(generateConfigJson());
+        let config = generateConfigJson();
+
+        window.sprt.render(config).then((res)=>{
+
+        canvas.width = res.width;
+        canvas.height = res.height;
+
+        let ctx = canvas.getContext("2d");
+        let palette = new ImageData(new Uint8ClampedArray(res.image) , res.width , res.height);
+        ctx.putImageData(palette , 0 ,0);
+        
+    })
+
     })
 
     return element;

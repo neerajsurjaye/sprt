@@ -30,9 +30,10 @@ app.whenReady().then(()=>{
     }
 
     let sprt : Core = new Core(renderImage);
-    ipcMain.handle('render' , ()=>{return sprt.render()})
+    ipcMain.handle('render' , (event : any , config : any)=>{
+        return sprt.render('channelx' , config)})
     ipcMain.handle('refresh' , (config : any)=>{
-        sprt.updateConfig(config);
+        sprt.updateConfig(config);  
     })
 
 })

@@ -13,9 +13,10 @@ contextBridge.exposeInMainWorld('api' , {
 });
 
 contextBridge.exposeInMainWorld('sprt', {
-  render : async ()=>{
+  render : async (config : any)=>{
 	try{
-	  let image = await ipcRenderer.invoke('render');
+		
+	  let image = await ipcRenderer.invoke('render' , config);
 	  return image;
 	}catch(error){
 	  console.error(error);   
