@@ -147,9 +147,7 @@ function getCameraConfig() {
     let configInputs = cameraForm.querySelectorAll(".config-camera-data");
     let camera = {};
 
-    for (let idx = 0; idx < configInputs.length; idx++) {
-        let element = configInputs[idx];
-
+    for (let element of configInputs) {
         if (element.getAttribute("name")) {
             camera[element.getAttribute("name")] = Number(element.value);
         }
@@ -163,10 +161,12 @@ function getCameraConfig() {
 
 function getXYZ(elementId) {
     let parent = document.getElementById(elementId);
+    let elements = parent.querySelectorAll("label input");
 
     let output = {};
-    for (let idx in parent.children) {
-        let element = parent.children[idx];
+    console.log(elements);
+    for (let element of elements) {
+        // let element = parent.children[idx]/;
 
         if (element.tagName == "INPUT") {
             output[element.getAttribute("name")] = Number(element.value);

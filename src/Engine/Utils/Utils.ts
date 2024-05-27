@@ -11,7 +11,7 @@ import Camera from "./Camera";
 
 class Utils {
     static readonly _infinity: number = Number.POSITIVE_INFINITY;
-    static readonly _pi: number = 3.1415926535897932385;
+    static readonly _pi: number = 3.141592653589793;
 
     static get INFINITY() {
         return this._infinity;
@@ -48,7 +48,6 @@ class Utils {
 
     static createObject(objectConfig: any): Hittable {
         if (objectConfig.objectType == "sphere") {
-            // let objLoc = objectConfig.location;
             return new Sphere(
                 new Vec3(
                     objectConfig.locx,
