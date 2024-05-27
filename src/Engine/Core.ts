@@ -10,58 +10,62 @@ import Utils from "./Utils/Utils";
 import Color from "./Vectors/Color";
 import Vec3 from "./Vectors/Vec3";
 
-class Core{
+class Core {
+    camera: Camera;
+    world: HittableList;
 
-    camera : Camera;
-    world : HittableList;
-
-    constructor(cb? : Function | null){
+    constructor(cb?: Function | null) {
         this.camera = new Camera();
         this.world = new HittableList();
         this.camera.cb = cb;
 
         //sample world
-        let materialMetal : Material = new Metal(new Color(1 , 1 , 1) , 0);
-        let materialMetalFuzz : Material = new Metal(new Color(1 , 1 , 1) , 0.3);
-        let materialDiffuse : Material = new Lambertian(new Color(.5 , .8 , 0));
-        let materialGround : Material = new Lambertian(new Color(0.8 , 1 , 0.8));
-        let materialDiffuseRed : Material = new Lambertian(new Color(1 , 0 , 0));
-        let materialGlass : Material = new Dielectric(1 / 1.33);
+        let materialMetal: Material = new Metal(new Color(1, 1, 1), 0);
+        let materialMetalFuzz: Material = new Metal(new Color(1, 1, 1), 0.3);
+        let materialDiffuse: Material = new Lambertian(new Color(0.5, 0.8, 0));
+        let materialGround: Material = new Lambertian(new Color(0.8, 1, 0.8));
+        let materialDiffuseRed: Material = new Lambertian(new Color(1, 0, 0));
+        let materialGlass: Material = new Dielectric(1 / 1.33);
 
         //world
-        this.world.add(new Sphere(new Vec3(0 , -100.5, -1) , 100 , materialGround));
-        this.world.add(new Sphere(new Vec3(-1 , 0 , -3) , 0.5 , materialMetal));
-        this.world.add(new Sphere(new Vec3(0 , 0 , -2) , 0.5 , materialDiffuse));
-        this.world.add(new Sphere(new Vec3(0.9 , 0 , -2) , 0.5 , materialMetalFuzz));
-        this.world.add(new Sphere(new Vec3(.2 , -0.2 , -1) , 0.1 , materialDiffuseRed));
-        this.world.add(new Sphere(new Vec3(-1 , 0.1 , -1.5) , 0.3 , materialGlass));
-
+        this.world.add(
+            new Sphere(new Vec3(0, -100.5, -1), 100, materialGround)
+        );
+        this.world.add(new Sphere(new Vec3(-1, 0, -3), 0.5, materialMetal));
+        this.world.add(new Sphere(new Vec3(0, 0, -2), 0.5, materialDiffuse));
+        this.world.add(
+            new Sphere(new Vec3(0.9, 0, -2), 0.5, materialMetalFuzz)
+        );
+        this.world.add(
+            new Sphere(new Vec3(0.2, -0.2, -1), 0.1, materialDiffuseRed)
+        );
+        this.world.add(new Sphere(new Vec3(-1, 0.1, -1.5), 0.3, materialGlass));
 
         this.camera.samplePerPixel = 20;
         this.camera.initialize();
-
-
     }
 
-    add(object : Hittable){
+    add(object: Hittable) {
         this.world.add(object);
     }
 
-    render(channel : any , config : any) : Object{
+    render(channel: any, config: any): Object {
+        console.log(config);
 
-        
-        config.camera = {
-            aspectRatio : 16 / 9,
-            imageWidth : 400,
-            lookFrom : {x : 5 , y : .5 , z : 0},
-            lookAt : {x : 0 , y : 1 , z : 0},
-            vfov : 45,
-            samplePerPixel : 5,
-            defocusAngle : 0,
-            maxDepth : 8
-        }
-        console.log('render' , config.world);
-        
+        config.camera = config.camera
+            ? config.camera
+            : {
+                  aspectRatio: 16 / 9,
+                  imageWidth: 400,
+                  lookFrom: { x: 5, y: 0.5, z: 0 },
+                  lookAt: { x: 0, y: 1, z: 0 },
+                  vfov: 45,
+                  samplePerPixel: 5,
+                  defocusAngle: 0,
+                  maxDepth: 8,
+              };
+
+        console.log("render", config);
 
         this.updateConfig(config);
 
@@ -124,20 +128,17 @@ class Core{
         //     maxDepth : 8
         // }});
 
-        
         return this.camera.render(this.world);
     }
 
-    renderImage() : void {
+    renderImage(): void {
         return this.camera.render_old(this.world);
     }
 
-    updateConfig(config : any) : void{
-        
-
-        Utils.configWorld(config.world , this.world);
-        Utils.configCamera(config.camera , this.camera);
-    }   
+    updateConfig(config: any): void {
+        Utils.configWorld(config.world, this.world);
+        Utils.configCamera(config.camera, this.camera);
+    }
 }
 
 export default Core;

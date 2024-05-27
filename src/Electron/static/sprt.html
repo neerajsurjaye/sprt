@@ -1,33 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
 
-    <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/style.css" />
+    </head>
 
-</head>
+    <body>
+        <nav>SPRT</nav>
 
+        <main>
+            <canvas id="image"></canvas>
+            <div id="config">
+                <div id="config-header">
+                    <button id="add-object">Add Object</button>
+                    <button id="add-material">Create Material</button>
+                </div>
 
-<body>
-    <nav>SPRT</nav>
+                <div id="config-camera">
+                    <form id="config-camera-form">
+                        <div>
+                            <label for="aspectRatio">Aspect Ratio</label>
+                            <input
+                                id="aspectRatio"
+                                class="config-camera-data"
+                                name="aspectRatio"
+                                type="number"
+                                value="1"
+                            />
+                        </div>
 
-    <main>
-        <canvas id="image"></canvas>
-        <div id="config">
-            <div id="config-header">
-                <button id="add-object">Add Object</button>
-                <button id="add-material">Create Material</button>
+                        <div>
+                            <label for="imageWidth">Image Width</label>
+                            <input
+                                id="imageWidth"
+                                class="config-camera-data"
+                                name="imageWidth"
+                                type="number"
+                                value="400"
+                            />
+                        </div>
+
+                        <div id="lookFrom">
+                            <label>x</label>
+                            <input name="x" type="number" value="1" />
+                            <label>y</label>
+                            <input name="y" type="number" value="1" />
+                            <label>z</label>
+                            <input name="z" type="number" value="1" />
+                        </div>
+
+                        <div id="lookAt">
+                            <label>x</label>
+                            <input name="x" type="number" value="0" />
+                            <label>y</label>
+                            <input name="y" type="number" value="0" />
+                            <label>z</label>
+                            <input name="z" type="number" value="0" />
+                        </div>
+
+                        <div>
+                            <label for="vfov">FOV</label>
+                            <input
+                                id="vfov"
+                                class="config-camera-data"
+                                name="vfov"
+                                type="number"
+                                value="45"
+                            />
+                        </div>
+                        <div>
+                            <label for="samplePerPixel">Sample Per Pixel</label>
+                            <input
+                                id="samplePerPixel"
+                                class="config-camera-data"
+                                name="samplePerPixel"
+                                type="number"
+                                value="10"
+                            />
+                        </div>
+                        <div>
+                            <label for="defocusAngle">Defocus Angle</label>
+                            <input
+                                id="defocusAngle"
+                                class="config-camera-data"
+                                name="defocusAngle"
+                                type="number"
+                                value="0"
+                            />
+                        </div>
+                        <div>
+                            <label for="maxDepth">Max Depth</label>
+                            <input
+                                id="maxDepth"
+                                class="config-camera-data"
+                                name="maxDepth"
+                                type="number"
+                                value="4"
+                            />
+                        </div>
+                    </form>
+                </div>
+                <div id="config-world"></div>
             </div>
+        </main>
+    </body>
 
-            <div id="config-body"></div>
-
-        </div>
-    </main>
-
-</body>
-
-<script src="./js/sprt.js"></script>
-
+    <script src="./js/sprt.js"></script>
 </html>

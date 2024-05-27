@@ -35,7 +35,7 @@ class Utils {
 
     static configWorld(config: Array<any>, world: HittableList) {
         world.clear();
-        console.log(config);
+        console.log("world", JSON.stringify(config));
 
         if (!config) return;
 

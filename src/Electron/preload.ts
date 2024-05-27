@@ -1,4 +1,3 @@
-import { channel } from "diagnostics_channel";
 
 const { contextBridge  , ipcRenderer} = require('electron');
 
