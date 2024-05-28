@@ -23,6 +23,8 @@ let canvas = document.getElementById("image");
 let addObject = document.getElementById("add-object");
 let configWorld = document.getElementById("config-world");
 let configCamera = document.getElementById("config-camera");
+let configMaterial = document.getElementById("config-material");
+let addMaterial = document.getElementById("add-material");
 
 addObject.addEventListener("click", () => {
     //todo put in a seprate function
@@ -46,6 +48,7 @@ addObject.addEventListener("click", () => {
     //removes the form below
     //todo seprate function
     objectTypes.addEventListener("change", (event) => {
+        //when changing option removes the form
         if (lastChild != null) objectForm.removeChild(lastChild);
 
         let objectParamsForm = generateObjectParams(event.target.value);
@@ -225,6 +228,79 @@ function initializeCameraConfig() {
         if (element.tagName == "INPUT") {
             element.addEventListener("change", reRender);
         }
+    }
+}
+
+addMaterial.addEventListener("click", () => {
+    let lastChild = null;
+
+    let materialForm = createElement("form", {
+        class: "materialForm",
+    });
+
+    let materialTypes = createElement("select", {
+        class: "materialTypes",
+        name: "mateialTypes",
+    });
+
+    let materialNone = new Option("none", "none");
+    materialTypes.add(materialNone);
+
+    materialTypes.add(new Option("Dielectric", "Dielectric"));
+    materialTypes.add(new Option("Lambertian", "Lambertian"));
+    materialTypes.add(new Option("Metal", "Metal"));
+    //todo add all materials
+    //add materials
+
+    //removes the form below
+    //todo seprate function
+    materialTypes.addEventListener("change", (event) => {
+        if (lastChild != null) materialForm.removeChild(lastChild);
+
+        let materialParamsForm = generateMaterialParams(event.target.value);
+        lastChild = materialParamsForm;
+        if (materialParamsForm == null) return;
+
+        materialForm.appendChild(materialParamsForm);
+    });
+
+    materialForm.appendChild(materialTypes);
+
+    configMaterial.appendChild(materialForm);
+});
+
+function generateMaterialParams(materialType) {
+    if (materialType == "Dielectric") {
+        let materialParams = createElement("div", { class: "materialParams" });
+
+        let refractiveIndexLabel = createElement("label", {
+            textContent: "Refractive Index",
+        });
+        let refractiveIndex = createElement("input", {
+            type: "number",
+            value: 0,
+            name: "ir",
+        });
+
+        materialParams.appendChild(refractiveIndexLabel);
+        materialParams.appendChild(refractiveIndex);
+        return materialParams;
+    }
+
+    if (materialType == "Lambertian") {
+        let materialParams = createElement("div", { class: "materialParams" });
+
+        let Lambertian = createElement("input", {
+            type: "number",
+            value: 1.3,
+            name: "ir",
+        });
+
+        materialParams.add(refractiveIndex);
+        return materialParams;
+    }
+
+    if (materialType == "Metal") {
     }
 }
 
