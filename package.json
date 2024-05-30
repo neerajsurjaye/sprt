@@ -1,38 +1,39 @@
 {
-  "name": "sprt",
-  "version": "2.0.0",
-  "description": "Raytracing engine",
-  "main": "build/Electron/index.js",
-  "scripts": {
-    "test": "./index.js",
-    "local": "npx tsc && node ./build/Engine/app.js",
-    "compile": "tsc && copyfiles -f npx run clone",
-    "clone": "cpx src/Electron/static/**/* build/Electron/static/",
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "clone-start": "npm run clone && npm run start",
-    "compile-clone": "npm run compile && npm run clone",
-    "execute-app" : "npm run compile && npm run clone && npm run start"
-  },
-  "author": "Neeraj Surjaye",
-  "license": "MIT",
-  "devDependencies": {
-    "@electron-forge/cli": "^7.4.0",
-    "@electron-forge/maker-deb": "^7.4.0",
-    "@electron-forge/maker-rpm": "^7.4.0",
-    "@electron-forge/maker-squirrel": "^7.4.0",
-    "@electron-forge/maker-zip": "^7.4.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
-    "@electron-forge/plugin-fuses": "^7.4.0",
-    "@electron/fuses": "^1.8.0",
-    "@types/node": "^20.12.7",
-    "electron": "^30.0.3",
-    "typescript": "^5.4.5"
-  },
-  "dependencies": {
-    "copyfiles": "^2.4.1",
-    "cpx2": "^7.0.1",
-    "electron-squirrel-startup": "^1.0.0"
-  }
+    "name": "sprt",
+    "version": "2.0.0",
+    "description": "Raytracing engine",
+    "main": "build/Electron/index.js",
+    "scripts": {
+        "test": "./index.js",
+        "local": "npx tsc && node ./build/Engine/app.js",
+        "compile": "tsc && copyfiles -f npx run clone",
+        "clone": "cpx src/Electron/static/**/* build/Electron/static/",
+        "start": "electron-forge start",
+        "package": "electron-forge package",
+        "make": "electron-forge make",
+        "clone-start": "npm run clone && npm run start",
+        "compile-clone": "npm run compile && npm run clone",
+        "execute-app": "npm run compile && npm run clone && npm run start"
+    },
+    "author": "Neeraj Surjaye",
+    "license": "MIT",
+    "devDependencies": {
+        "@electron-forge/cli": "^7.4.0",
+        "@electron-forge/maker-deb": "^7.4.0",
+        "@electron-forge/maker-rpm": "^7.4.0",
+        "@electron-forge/maker-squirrel": "^7.4.0",
+        "@electron-forge/maker-zip": "^7.4.0",
+        "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+        "@electron-forge/plugin-fuses": "^7.4.0",
+        "@electron/fuses": "^1.8.0",
+        "@types/node": "^20.12.7",
+        "electron": "^30.0.3",
+        "typescript": "^5.4.5"
+    },
+    "dependencies": {
+        "copyfiles": "^2.4.1",
+        "cpx2": "^7.0.1",
+        "electron-is-dev": "^3.0.1",
+        "electron-squirrel-startup": "^1.0.0"
+    }
 }

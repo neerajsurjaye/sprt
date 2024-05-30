@@ -16,8 +16,11 @@ const createWindow = (): void => {
         },
     });
 
+    const startURL = "http://localhost:3000/";
+    // const startURL =`file://${path.join(__dirname, "../../frontend/build/index.html")}`;
+
     win.webContents.openDevTools();
-    win.loadFile(path.join(__dirname, "/static/sprt.html"));
+    win.loadURL(startURL);
 };
 
 app.on("window-all-closed", () => {

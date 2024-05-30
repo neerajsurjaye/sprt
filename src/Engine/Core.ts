@@ -50,7 +50,10 @@ class Core {
     }
 
     render(channel: any, config: any): Object {
-        console.log(config);
+        console.log("Rendering");
+
+        config = config ? config : {};
+        console.log({ config });
 
         config.camera = config.camera
             ? config.camera
