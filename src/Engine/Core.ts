@@ -53,22 +53,33 @@ class Core {
         console.log("Rendering");
 
         config = config ? config : {};
-        console.log({ config });
-
         config.camera = config.camera
             ? config.camera
             : {
                   aspectRatio: 16 / 9,
                   imageWidth: 400,
-                  lookFrom: { x: 5, y: 0.5, z: 0 },
-                  lookAt: { x: 0, y: 1, z: 0 },
+                  lookFrom: { x: 5, y: 5, z: 5 },
+                  lookAt: { x: 0, y: 0, z: 0 },
                   vfov: 45,
                   samplePerPixel: 5,
                   defocusAngle: 0,
                   maxDepth: 8,
               };
-
-        console.log("render", config);
+        config.world = config.world
+            ? config.world
+            : [
+                  {
+                      objectType: "sphere",
+                      locx: 0,
+                      locy: 0,
+                      locz: 0,
+                      radius: 1,
+                      material: {
+                          materialType: "lambertian",
+                          color: { r: 1, g: 0.9, b: 0.2 },
+                      },
+                  },
+              ];
 
         this.updateConfig(config);
 

@@ -13,7 +13,8 @@
         "make": "electron-forge make",
         "clone-start": "npm run clone && npm run start",
         "compile-clone": "npm run compile && npm run clone",
-        "execute-app": "npm run compile && npm run clone && npm run start"
+        "execute-app": "npm run compile && npm run clone && npm run start",
+        "run-frontend": "cd src/frontend && npm start"
     },
     "author": "Neeraj Surjaye",
     "license": "MIT",

@@ -1,7 +1,10 @@
-"# SPRT" 
-Simple raytracing engine using nodejs.\
+"# SPRT"
+Simple raytracing engine using nodejs.
 
-npm run execute-app to run application
+"# To execute app"
+run 'npm run run-frontend'
+then from another terminal
+run 'npm run execute-app'
 
 Followed - https://raytracing.github.io/books/RayTracingInOneWeekend.html\
 Use ppm viewer to view images if output is ppm\
