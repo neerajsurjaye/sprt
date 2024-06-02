@@ -3,7 +3,9 @@ Simple raytracing engine using nodejs.
 
 "# To execute app"
 run 'npm run run-frontend'
+
 then from another terminal
+
 run 'npm run execute-app'
 
 Followed - https://raytracing.github.io/books/RayTracingInOneWeekend.html\
