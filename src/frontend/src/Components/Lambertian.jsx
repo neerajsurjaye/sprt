@@ -1,4 +1,4 @@
-let Lambertian = () => {
+const Lambertian = () => {
     return (
         <div action="lambertian-form">
             <label>Color</label>

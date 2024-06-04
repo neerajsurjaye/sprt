@@ -36,80 +36,86 @@ function App() {
     // });
 
     let [response, setResponse] = useState(null);
+    let [config, setConfig] = useState({});
 
     let reRender = () => {
-        // setResponse("red");
-        window.sprt
-            .render({
-                world: [
-                    {
-                        objectType: "sphere",
-                        locx: -2,
-                        locy: 1,
-                        locz: -2,
-                        radius: 1,
-                        material: {
-                            materialType: "lambertian",
-                            color: { r: 0.2, g: 0.9, b: 0.2 },
-                        },
+        let requestConfig = {
+            world: [
+                {
+                    objectType: "sphere",
+                    locx: -2,
+                    locy: 1,
+                    locz: -2,
+                    radius: 1,
+                    material: {
+                        materialType: "lambertian",
+                        color: { r: 0.2, g: 0.9, b: 0.2 },
                     },
-                    {
-                        objectType: "sphere",
-                        locx: -1,
-                        locy: 1,
-                        locz: 1,
-                        radius: 1,
-                        material: {
-                            materialType: "dielectric",
-                            ir: 1.33,
-                        },
-                    },
-                    {
-                        objectType: "sphere",
-                        locx: -6,
-                        locy: 4,
-                        locz: 0,
-                        radius: 4,
-                        material: {
-                            materialType: "metal",
-                            color: { r: 0.2, g: 0.3, b: 1 },
-                            fuzz: 0,
-                        },
-                    },
-                    {
-                        objectType: "sphere",
-                        // location : {x : 0 , y : -10000 , z : 0},
-                        locx: 0,
-                        locy: -10000,
-                        locz: 0,
-                        radius: 10000,
-                        material: {
-                            materialType: "lambertian",
-                            color: { r: 1, g: 0.2, b: 0.2 },
-                        },
-                    },
-                ],
-                camera: {
-                    aspectRatio: 16 / 9,
-                    imageWidth: 400,
-                    lookFrom: { x: 5, y: 0.5, z: 0 },
-                    lookAt: { x: 0, y: 1, z: 0 },
-                    vfov: 45,
-                    samplePerPixel: 20,
-                    defocusAngle: 0,
-                    maxDepth: 8,
                 },
-            })
-            .then((res) => {
-                console.log("app.jsx rerender", res);
-                setResponse(res);
-            });
+                {
+                    objectType: "sphere",
+                    locx: -1,
+                    locy: 1,
+                    locz: 1,
+                    radius: 1,
+                    material: {
+                        materialType: "dielectric",
+                        ir: 1.33,
+                    },
+                },
+                {
+                    objectType: "sphere",
+                    locx: -6,
+                    locy: 4,
+                    locz: 0,
+                    radius: 4,
+                    material: {
+                        materialType: "metal",
+                        color: { r: 0.2, g: 0.3, b: 1 },
+                        fuzz: 0,
+                    },
+                },
+                {
+                    objectType: "sphere",
+                    locx: 0,
+                    locy: -10000,
+                    locz: 0,
+                    radius: 10000,
+                    material: {
+                        materialType: "lambertian",
+                        color: { r: 1, g: 0.2, b: 0.2 },
+                    },
+                },
+            ],
+            camera: {
+                aspectRatio: 16 / 9,
+                imageWidth: 400,
+                lookFrom: { x: 5, y: 0.5, z: 0 },
+                lookAt: { x: 0, y: 1, z: 0 },
+                vfov: 45,
+                samplePerPixel: 20,
+                defocusAngle: 0,
+                maxDepth: 8,
+            },
+        };
+
+        if (config.camera) requestConfig.camera = config.camera;
+
+        console.log({ requestConfig });
+        window.sprt.render(requestConfig).then((res) => {
+            console.log("app.jsx rerender", res);
+            setResponse(res);
+        });
     };
+
+    useEffect(() => {
+        console.log(config);
+    }, [config]);
 
     return (
         <div className="App">
             <Canvas res={response}></Canvas>
-            <ConfigForm></ConfigForm>
+            <ConfigForm useConfig={[config, setConfig]}></ConfigForm>
             <button onClick={reRender}>Click</button>
         </div>
     );

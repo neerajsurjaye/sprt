@@ -7,7 +7,7 @@ const Canvas = (props) => {
     useEffect(() => {
         //todo props should set the data of canvas
 
-        if (!canvasRef || !canvasRef.current || !res) return;
+        if (!canvasRef?.current || !res) return;
 
         const canvas = canvasRef.current;
         canvas.width = res.width;

@@ -1,8 +1,11 @@
 import { useState } from "react";
 import CreateObject from "./CreateObject";
 import CreateMaterial from "./CrerateMaterial";
+import CameraConfig from "./CameraConfig";
 
-const ConfigForm = () => {
+const ConfigForm = (props) => {
+    let [config, setConfig] = props.useConfig;
+
     let [objectConfigs, setObjectConfigs] = useState([]);
     let [materialConfigs, setMaterialConfigs] = useState([]);
 
@@ -20,8 +23,7 @@ const ConfigForm = () => {
     return (
         <form className="config-form">
             <div className="camera-config">
-                {/* caemra config */}
-                camera config
+                <CameraConfig useConfig={props.useConfig}></CameraConfig>
             </div>
 
             <div className="config-create">
