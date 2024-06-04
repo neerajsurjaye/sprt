@@ -1,6 +1,20 @@
+import { useContext } from "react";
 import SelectMaterial from "./SelectMaterial";
+import ConfigContext from "../Context/ConfigContext";
 
 let SphereForm = () => {
+    let { config, setConfig } = useContext(ConfigContext);
+
+    let getMaterialOptions = () => {
+        let matOptions = [];
+        let materials = config.materials;
+        if (!materials) return;
+        for (let idx in materials) {
+            matOptions.push(<option>{materials[idx].name}</option>);
+        }
+        return matOptions;
+    };
+
     return (
         <div className="object-params">
             <label>Location</label>
@@ -16,7 +30,9 @@ let SphereForm = () => {
 
             <label> Radius</label>
             <input type="text" value={1} />
-            <SelectMaterial></SelectMaterial>
+
+            <label>Material</label>
+            <select>{getMaterialOptions()}</select>
         </div>
     );
 };

@@ -1,29 +1,33 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CreateObject from "./CreateObject";
 import CreateMaterial from "./CrerateMaterial";
 import CameraConfig from "./CameraConfig";
+import ConfigContext from "../Context/ConfigContext";
 
 const ConfigForm = (props) => {
-    let [config, setConfig] = props.useConfig;
-
     let [objectConfigs, setObjectConfigs] = useState([]);
     let [materialConfigs, setMaterialConfigs] = useState([]);
+    let [materialCount, setMaterialCount] = useState(0);
 
     const appendCreateObject = () => {
         setObjectConfigs([...objectConfigs, <CreateObject></CreateObject>]);
     };
 
     const appendCreateMaterial = () => {
-        setMaterialConfigs([
-            ...materialConfigs,
-            <CreateMaterial></CreateMaterial>,
-        ]);
+        setMaterialCount(materialCount + 1);
+        let newMaterial = (
+            <CreateMaterial
+                key={materialCount}
+                idx={materialCount}
+            ></CreateMaterial>
+        );
+        setMaterialConfigs([...materialConfigs, newMaterial]);
     };
 
     return (
         <form className="config-form">
             <div className="camera-config">
-                <CameraConfig useConfig={props.useConfig}></CameraConfig>
+                <CameraConfig></CameraConfig>
             </div>
 
             <div className="config-create">

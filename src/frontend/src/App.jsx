@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import Canvas from "./Components/Canvas";
 import ConfigForm from "./Components/ConfigForm";
+import ConfigContext from "./Context/ConfigContext";
 
 function App() {
     let canvas = document.getElementById("image");
@@ -113,11 +114,13 @@ function App() {
     }, [config]);
 
     return (
-        <div className="App">
-            <Canvas res={response}></Canvas>
-            <ConfigForm useConfig={[config, setConfig]}></ConfigForm>
-            <button onClick={reRender}>Click</button>
-        </div>
+        <ConfigContext.Provider value={{ config, setConfig }}>
+            <div className="App">
+                <Canvas res={response}></Canvas>
+                <ConfigForm useConfig={[config, setConfig]}></ConfigForm>
+                <button onClick={reRender}>Click</button>
+            </div>
+        </ConfigContext.Provider>
     );
 }
 

@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import ConfigContext from "../Context/ConfigContext";
 
 const CameraConfig = (props) => {
-    let [config, setConfig] = props.useConfig;
+    // let [config, setConfig] = props.useConfig;
+    const { config, setConfig } = useContext(ConfigContext);
 
     let [cameraConfig, setCameraConfig] = useState({
         aspectRatio: 16 / 9,
