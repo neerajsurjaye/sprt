@@ -8,9 +8,14 @@ const ConfigForm = (props) => {
     let [objectConfigs, setObjectConfigs] = useState([]);
     let [materialConfigs, setMaterialConfigs] = useState([]);
     let [materialCount, setMaterialCount] = useState(0);
+    let [objectCount, setObjectCount] = useState(0);
 
     const appendCreateObject = () => {
-        setObjectConfigs([...objectConfigs, <CreateObject></CreateObject>]);
+        setObjectCount(objectCount + 1);
+        let newObject = (
+            <CreateObject key={objectCount} idx={objectCount}></CreateObject>
+        );
+        setObjectConfigs([...objectConfigs, newObject]);
     };
 
     const appendCreateMaterial = () => {

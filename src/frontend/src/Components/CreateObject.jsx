@@ -1,8 +1,38 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SphereForm from "./SphereForm";
+import ConfigContext from "../Context/ConfigContext";
 
-const CreateObject = () => {
-    let [objectForms, setObjectForms] = useState(null);
+const CreateObject = (props) => {
+    let [objectType, setObjectType] = useState("NONE");
+    let [objectConfig, setObjectConfig] = useState({});
+    let { config, setConfig } = useContext(ConfigContext);
+
+    let idx = props.idx;
+
+    let objectsComponents = {
+        sphere: (
+            <SphereForm
+                useConfig={[objectConfig, setObjectConfig]}
+            ></SphereForm>
+        ),
+        NONE: null,
+    };
+
+    useEffect(() => {
+        if (config.objects) {
+            let objects = config.objects;
+            objects = {
+                ...objects,
+            };
+            objects[idx] = objectConfig;
+            setConfig({ ...config, objects: objects });
+        } else {
+            let objects = {};
+            objects[idx] = objectConfig;
+
+            setConfig({ ...config, objects });
+        }
+    }, [objectConfig]);
 
     let getObjectOptions = () => {
         let objectNames = ["NONE", "sphere"];
@@ -18,22 +48,13 @@ const CreateObject = () => {
     };
 
     let generateObjectForm = (event) => {
-        let objectType = event?.target?.value;
-        if (!objectType) return;
-
-        if (objectType == "sphere") {
-            setObjectForms(<SphereForm> </SphereForm>);
-        } else if (objectType == "NONE") {
-            setObjectForms(null);
-        } else {
-            setObjectForms(null);
-        }
+        setObjectType(event.target.value);
     };
 
     return (
         <div className="create-object">
             <select onChange={generateObjectForm}>{getObjectOptions()}</select>
-            {objectForms}
+            {objectsComponents[objectType]}
         </div>
     );
 };

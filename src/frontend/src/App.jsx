@@ -39,6 +39,7 @@ function App() {
     let [response, setResponse] = useState(null);
     let [config, setConfig] = useState({});
 
+    //rerender should create the final config from config
     let reRender = () => {
         let requestConfig = {
             world: [
