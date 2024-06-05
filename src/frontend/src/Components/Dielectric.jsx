@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 
-let Dielectric = (props) => {
+const Dielectric = (props) => {
     let materialConfig = props.materialConfig;
     let setMaterialConfig = props.setMaterialConfig;
     let [ir, setIr] = useState(1.4);
 
     useEffect(() => {
-        setMaterialConfig({ ...materialConfig, ir: ir });
+        setMaterialConfig({
+            ...materialConfig,
+            materialType: "dielectric",
+            ir: ir,
+        });
     }, [ir]);
 
     return (

@@ -39,6 +39,32 @@ function App() {
     let [response, setResponse] = useState(null);
     let [config, setConfig] = useState({});
 
+    const createFinalConfig = () => {
+        let finalConfig = {};
+        finalConfig.camera = config.camera;
+
+        let world = [];
+
+        for (let key in config.objects) {
+            let object = config.objects[key];
+            let objMaterialName = object.materialName;
+
+            let materials = config.materials;
+            let materialsArray = Object.values(materials);
+            let selectedMaterial = materialsArray.filter(
+                (mat) => mat.name == objMaterialName
+            );
+
+            if (selectedMaterial.length > 0)
+                object.material = selectedMaterial[0];
+
+            world.push(object);
+        }
+
+        finalConfig.world = world;
+        return finalConfig;
+    };
+
     //todo rerender should create the final config from config
     let reRender = () => {
         let requestConfig = {
@@ -101,7 +127,10 @@ function App() {
             },
         };
 
-        if (config.camera) requestConfig.camera = config.camera;
+        const finalConfig = createFinalConfig();
+
+        if (finalConfig.camera) requestConfig.camera = finalConfig.camera;
+        if (finalConfig.world) requestConfig.world = finalConfig.world;
 
         console.log({ requestConfig });
         window.sprt.render(requestConfig).then((res) => {

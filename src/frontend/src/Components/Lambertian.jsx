@@ -12,7 +12,11 @@ const Lambertian = (props) => {
 
     useEffect(() => {
         console.log("lambertian color", color);
-        setMaterialConfig({ ...materialConfig, color: color });
+        setMaterialConfig({
+            ...materialConfig,
+            materialType: "lambertian",
+            color: color,
+        });
     }, [color]);
 
     return (

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import SelectMaterial from "./SelectMaterial";
 import ConfigContext from "../Context/ConfigContext";
 
-let SphereForm = (props) => {
+const SphereForm = (props) => {
     let { config, setConfig } = useContext(ConfigContext);
     let [objectConfig, setObjectConfig] = props.useConfig;
     let [sphereConfig, setSphereConfig] = useState({
@@ -34,6 +34,12 @@ let SphereForm = (props) => {
     };
 
     let updateConfig = (event) => {
+        let newConfig = { ...sphereConfig };
+        newConfig[event.target.name] = Number(event.target.value);
+        setSphereConfig(newConfig);
+    };
+
+    let updateMaterial = (event) => {
         let newConfig = { ...sphereConfig };
         newConfig[event.target.name] = event.target.value;
         setSphereConfig(newConfig);
@@ -96,7 +102,7 @@ let SphereForm = (props) => {
             />
 
             <label>Material</label>
-            <select onChange={updateConfig} name="materialName">
+            <select onChange={updateMaterial} name="materialName">
                 {getMaterialOptions()}
             </select>
         </div>

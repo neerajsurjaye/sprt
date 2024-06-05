@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-let Metal = (props) => {
+const Metal = (props) => {
     let [materialConfig, setMaterialConfig] = props.useMaterial;
     let [color, setColor] = useState({ r: 1, g: 1, b: 0 });
     let [fuzz, setFuzz] = useState(0);
@@ -18,7 +18,12 @@ let Metal = (props) => {
 
     useEffect(() => {
         console.log("metalFuzz", materialConfig, fuzz);
-        setMaterialConfig({ ...materialConfig, fuzz: fuzz, color: color });
+        setMaterialConfig({
+            ...materialConfig,
+            materialType: "metal",
+            fuzz: fuzz,
+            color: color,
+        });
     }, [fuzz, color]);
 
     return (
