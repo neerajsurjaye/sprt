@@ -52,8 +52,13 @@ const CreateObject = (props) => {
     };
 
     return (
-        <div className="create-object">
-            <select onChange={generateObjectForm}>{getObjectOptions()}</select>
+        <div className="create-object flex center column child-width-100">
+            <div className="form-input">
+                <label>ObjectType</label>
+                <select onChange={generateObjectForm}>
+                    {getObjectOptions()}
+                </select>
+            </div>
             {objectsComponents[objectType]}
         </div>
     );

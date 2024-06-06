@@ -1,0 +1,63 @@
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.heading {
+    text-align: center;
+}
+
+.form-input {
+    display: flex;
+}
+
+.form-input > * {
+    width: 100%;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+}
+
+.t-center {
+    text-align: center;
+}
+
+.coordinates .form-input label,
+.color .form-input label {
+    text-align: right;
+    padding-right: 32px;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.form-title {
+    /* text-align: center; */
+    width: 100%;
+    display: block;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.child-width-100 > * {
+    width: 100%;
+}

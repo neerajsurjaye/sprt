@@ -24,27 +24,33 @@ const Lambertian = (props) => {
             <label>Color</label>
 
             <div className="color">
-                <label>R</label>
-                <input
-                    type="number"
-                    value={color.r}
-                    name="r"
-                    onChange={updateColor}
-                />
-                <label>G</label>
-                <input
-                    type="number"
-                    value={color.g}
-                    name="g"
-                    onChange={updateColor}
-                />
-                <label>B</label>
-                <input
-                    type="number"
-                    value={color.b}
-                    name="b"
-                    onChange={updateColor}
-                />
+                <div className="form-input">
+                    <label>R</label>
+                    <input
+                        type="number"
+                        value={color.r}
+                        name="r"
+                        onChange={updateColor}
+                    />
+                </div>
+                <div className="form-input">
+                    <label>G</label>
+                    <input
+                        type="number"
+                        value={color.g}
+                        name="g"
+                        onChange={updateColor}
+                    />
+                </div>
+                <div className="form-input">
+                    <label>B</label>
+                    <input
+                        type="number"
+                        value={color.b}
+                        name="b"
+                        onChange={updateColor}
+                    />
+                </div>
             </div>
         </div>
     );

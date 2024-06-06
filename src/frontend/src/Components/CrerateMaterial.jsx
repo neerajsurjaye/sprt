@@ -68,28 +68,33 @@ const CreateMaterial = (props) => {
     }, [materialConfig]);
 
     return (
-        <form className="create-material">
-            <label htmlFor="materialName">MaterialName</label>
-            <input
-                type="text"
-                name="materaialName"
-                id="materialName"
-                value={materialConfig.name}
-                onChange={(event) => {
-                    setMaterialConfig({
-                        ...materialConfig,
-                        name: event.target.value,
-                    });
-                }}
-            />
-            <select
-                onChange={(event) => {
-                    setMaterialName(event.target.value);
-                }}
-            >
-                {getMaterialOptions()}
-            </select>
+        <form className="create-material flex center column child-width-100">
+            <div className="form-input">
+                <label htmlFor="materialName">MaterialName</label>
+                <input
+                    type="text"
+                    name="materaialName"
+                    id="materialName"
+                    value={materialConfig.name}
+                    onChange={(event) => {
+                        setMaterialConfig({
+                            ...materialConfig,
+                            name: event.target.value,
+                        });
+                    }}
+                />
+            </div>
 
+            <div className="form-input">
+                <label>MaterialType</label>
+                <select
+                    onChange={(event) => {
+                        setMaterialName(event.target.value);
+                    }}
+                >
+                    {getMaterialOptions()}
+                </select>
+            </div>
             {components[materialName]}
         </form>
     );

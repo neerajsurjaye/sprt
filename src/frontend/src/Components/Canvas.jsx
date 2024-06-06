@@ -21,7 +21,9 @@ const Canvas = (props) => {
         ctx.putImageData(palette, 0, 0);
     }, [props.res]);
 
-    return <canvas ref={canvasRef} {...props}></canvas>;
+    return (
+        <canvas className={props.className} ref={canvasRef} {...props}></canvas>
+    );
 };
 
 export default Canvas;

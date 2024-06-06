@@ -22,7 +22,6 @@ const SphereForm = (props) => {
             </option>,
         ];
         let materials = config.materials;
-        if (!materials) return;
         for (let idx in materials) {
             matOptions.push(
                 <option name={"materialName"} value={materials[idx].name}>
@@ -67,44 +66,54 @@ const SphereForm = (props) => {
 
     return (
         <div className="object-params">
-            <label>Location</label>
+            <label className="form-title">Location</label>
 
-            <div className="location">
-                <label>X</label>
+            <div className="coordinates">
+                <div className="form-input">
+                    <label>x</label>
+                    <input
+                        type="number"
+                        value={sphereConfig.locx}
+                        name="locx"
+                        onChange={updateConfig}
+                    />
+                </div>
+                <div className="form-input">
+                    <label>y</label>
+                    <input
+                        type="number"
+                        value={sphereConfig.locy}
+                        name="locy"
+                        onChange={updateConfig}
+                    />
+                </div>
+                <div className="form-input">
+                    <label>z</label>
+                    <input
+                        type="number"
+                        value={sphereConfig.locz}
+                        name="locz"
+                        onChange={updateConfig}
+                    />
+                </div>
+            </div>
+
+            <div className="form-input">
+                <label> Radius</label>
                 <input
                     type="number"
-                    value={sphereConfig.locx}
-                    name="locx"
-                    onChange={updateConfig}
-                />
-                <label>Y</label>
-                <input
-                    type="number"
-                    value={sphereConfig.locy}
-                    name="locy"
-                    onChange={updateConfig}
-                />
-                <label>Z</label>
-                <input
-                    type="number"
-                    value={sphereConfig.locz}
-                    name="locz"
+                    value={sphereConfig.radius}
+                    name="radius"
                     onChange={updateConfig}
                 />
             </div>
 
-            <label> Radius</label>
-            <input
-                type="number"
-                value={sphereConfig.radius}
-                name="radius"
-                onChange={updateConfig}
-            />
-
-            <label>Material</label>
-            <select onChange={updateMaterial} name="materialName">
-                {getMaterialOptions()}
-            </select>
+            <div className="form-input">
+                <label>Material</label>
+                <select onChange={updateMaterial} name="materialName">
+                    {getMaterialOptions()}
+                </select>
+            </div>
         </div>
     );
 };

@@ -43,121 +43,134 @@ const CameraConfig = (props) => {
 
     return (
         <div className="camera-config">
-            <label htmlFor="aspectRatio">
-                Aspect Ratio{" "}
-                <input
-                    type="number"
-                    name="aspectRatio"
-                    value={cameraConfig.aspectRatio}
-                    onChange={updateCameraConfig}
-                />
-            </label>
-
-            <label htmlFor="imageWidth">
-                Image Width{" "}
-                <input
-                    type="number"
-                    name="imageWidth"
-                    value={cameraConfig.imageWidth}
-                    onChange={updateCameraConfig}
-                />
-            </label>
-
-            <div>
-                <label>lookFrom</label>
-
-                <div className="color">
-                    <label>x</label>
+            <h2 className="heading">Camera</h2>
+            <div className="config-form">
+                <div className="form-input">
+                    <label htmlFor="aspectRatio">Aspect Ratio </label>
                     <input
                         type="number"
-                        value={cameraConfig.lookFrom.x}
-                        name="lookFrom-x"
-                        onChange={updateCameraConfigVectors}
+                        name="aspectRatio"
+                        value={cameraConfig.aspectRatio}
+                        onChange={updateCameraConfig}
                     />
-                    <label>y</label>
+                </div>
+
+                <div className="form-input">
+                    <label htmlFor="imageWidth">Image Width </label>
                     <input
                         type="number"
-                        value={cameraConfig.lookFrom.y}
-                        name="lookFrom-y"
-                        onChange={updateCameraConfigVectors}
+                        name="imageWidth"
+                        value={cameraConfig.imageWidth}
+                        onChange={updateCameraConfig}
                     />
-                    <label>z</label>
+                </div>
+
+                <div>
+                    <div className="coordinates">
+                        <label className="form-title">lookFrom</label>
+                        <div className="form-input">
+                            <label>x</label>
+                            <input
+                                type="number"
+                                value={cameraConfig.lookFrom.x}
+                                name="lookFrom-x"
+                                onChange={updateCameraConfigVectors}
+                            />
+                        </div>
+                        <div className="form-input">
+                            <label>y</label>
+                            <input
+                                type="number"
+                                value={cameraConfig.lookFrom.y}
+                                name="lookFrom-y"
+                                onChange={updateCameraConfigVectors}
+                            />
+                        </div>
+                        <div className="form-input">
+                            <label>z</label>
+                            <input
+                                type="number"
+                                value={cameraConfig.lookFrom.z}
+                                name="lookFrom-z"
+                                onChange={updateCameraConfigVectors}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div className="coordinates">
+                        <label className="form-title">look-at</label>
+
+                        <div className="form-input">
+                            <label>x</label>
+                            <input
+                                type="number"
+                                value={cameraConfig.lookAt.x}
+                                name="lookAt-x"
+                                onChange={updateCameraConfigVectors}
+                            />
+                        </div>
+
+                        <div className="form-input">
+                            <label>y</label>
+                            <input
+                                type="number"
+                                value={cameraConfig.lookAt.y}
+                                name="lookAt-y"
+                                onChange={updateCameraConfigVectors}
+                            />
+                        </div>
+                        <div className="form-input">
+                            <label>z</label>
+                            <input
+                                type="number"
+                                value={cameraConfig.lookAt.z}
+                                name="lookAt-z"
+                                onChange={updateCameraConfigVectors}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="form-input">
+                    <label htmlFor="vFOV">vFOV </label>
                     <input
                         type="number"
-                        value={cameraConfig.lookFrom.z}
-                        name="lookFrom-z"
-                        onChange={updateCameraConfigVectors}
+                        name="vfov"
+                        value={cameraConfig.vfov}
+                        onChange={updateCameraConfig}
+                    />
+                </div>
+                <div className="form-input">
+                    <label htmlFor="defocusAngle">Defocus Angle </label>
+                    <input
+                        type="text"
+                        name="defocusAngle"
+                        value={cameraConfig.defocusAngle}
+                        onChange={updateCameraConfig}
+                    />
+                </div>
+
+                <div className="form-input">
+                    <label htmlFor="samplePerPixel">Sample Per pixel </label>
+                    <input
+                        type="text"
+                        name="samplePerPixel"
+                        value={cameraConfig.samplePerPixel}
+                        onChange={updateCameraConfig}
+                    />
+                </div>
+                <div className="form-input">
+                    <label htmlFor="maxDepth">Max Depth </label>
+                    <input
+                        type="text"
+                        name="maxDepth"
+                        value={cameraConfig.maxDepth}
+                        onChange={updateCameraConfig}
                     />
                 </div>
             </div>
-
-            <div>
-                <label>lookat</label>
-
-                <div className="color">
-                    <label>x</label>
-                    <input
-                        type="number"
-                        value={cameraConfig.lookAt.x}
-                        name="lookAt-x"
-                        onChange={updateCameraConfigVectors}
-                    />
-                    <label>y</label>
-                    <input
-                        type="number"
-                        value={cameraConfig.lookAt.y}
-                        name="lookAt-y"
-                        onChange={updateCameraConfigVectors}
-                    />
-                    <label>z</label>
-                    <input
-                        type="number"
-                        value={cameraConfig.lookAt.z}
-                        name="lookAt-z"
-                        onChange={updateCameraConfigVectors}
-                    />
-                </div>
-            </div>
-
-            <label htmlFor="vFOV">
-                vFOV{" "}
-                <input
-                    type="number"
-                    name="vfov"
-                    value={cameraConfig.vfov}
-                    onChange={updateCameraConfig}
-                />
-            </label>
-
-            <label htmlFor="defocusAngle">
-                Defocus Angle{" "}
-                <input
-                    type="text"
-                    name="defocusAngle"
-                    value={cameraConfig.defocusAngle}
-                    onChange={updateCameraConfig}
-                />
-            </label>
-
-            <label htmlFor="samplePerPixel">
-                Sample Per pixel{" "}
-                <input
-                    type="text"
-                    name="samplePerPixel"
-                    value={cameraConfig.samplePerPixel}
-                    onChange={updateCameraConfig}
-                />
-            </label>
-
-            <label htmlFor="maxDepth">
-                Max Depth{" "}
-                <input
-                    type="text"
-                    name="maxDepth"
-                    value={cameraConfig.maxDepth}
-                    onChange={updateCameraConfig}
-                />
-            </label>
         </div>
     );
 };

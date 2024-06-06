@@ -36,20 +36,29 @@ const ConfigForm = (props) => {
             </div>
 
             <div className="config-create">
-                <input
-                    type="button"
-                    value={"Create Object"}
-                    onClick={() => appendCreateObject()}
-                />
-                <input
-                    type="button"
-                    value={"Create Material"}
-                    onClick={() => appendCreateMaterial()}
-                />
+                <h2 className="heading">World</h2>
+                <div className="button-wrapper">
+                    <input
+                        type="button"
+                        value={"Create Object"}
+                        onClick={() => appendCreateObject()}
+                    />
+                    <input
+                        type="button"
+                        value={"Create Material"}
+                        onClick={() => appendCreateMaterial()}
+                    />
+                </div>
             </div>
 
-            <div className="config-objects">{objectConfigs}</div>
-            <div className="config-materials">{materialConfigs}</div>
+            <div className="config-objects">
+                <h4 className="heading">Objects</h4>
+                {objectConfigs}
+            </div>
+            <div className="config-materials">
+                <h4 className="heading">Materials</h4>
+                {materialConfigs}
+            </div>
         </form>
     );
 };

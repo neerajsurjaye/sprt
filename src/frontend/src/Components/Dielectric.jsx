@@ -14,8 +14,8 @@ const Dielectric = (props) => {
     }, [ir]);
 
     return (
-        <div action="dielectric-form">
-            <label htmlFor="Refraction Index"></label>
+        <div className="dielectric-form form-input">
+            <label htmlFor="Refraction Index">Refraction Index</label>
             <input
                 type="number"
                 value={ir}
@@ -23,9 +23,6 @@ const Dielectric = (props) => {
                     setIr(Number(event.target.value));
                 }}
             />
-
-            <h5>matConf : {JSON.stringify(materialConfig)}</h5>
-            <h5>{JSON.stringify(props.matConf)}</h5>
         </div>
     );
 };

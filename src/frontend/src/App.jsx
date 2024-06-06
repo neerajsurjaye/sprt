@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-import "./App.css";
+import { useEffect, useState } from "react";
+import "./style.css";
 import Canvas from "./Components/Canvas";
 import ConfigForm from "./Components/ConfigForm";
 import ConfigContext from "./Context/ConfigContext";
@@ -37,7 +37,11 @@ function App() {
     // });
 
     let [response, setResponse] = useState(null);
-    let [config, setConfig] = useState({});
+    let [config, setConfig] = useState({
+        camera: {},
+        materials: {},
+        objects: {},
+    });
 
     const createFinalConfig = () => {
         let finalConfig = {};
@@ -145,10 +149,12 @@ function App() {
 
     return (
         <ConfigContext.Provider value={{ config, setConfig }}>
-            <div className="App">
-                <Canvas res={response}></Canvas>
-                <ConfigForm useConfig={[config, setConfig]}></ConfigForm>
-                <button onClick={reRender}>Click</button>
+            <div className="App flex">
+                <Canvas res={response} className="flex-2"></Canvas>
+                <div className="configs flex-1">
+                    <ConfigForm useConfig={[config, setConfig]}></ConfigForm>
+                    <button onClick={reRender}>Click</button>
+                </div>
             </div>
         </ConfigContext.Provider>
     );
