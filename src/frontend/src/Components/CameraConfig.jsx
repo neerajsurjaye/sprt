@@ -42,7 +42,7 @@ const CameraConfig = (props) => {
     }, [cameraConfig]);
 
     return (
-        <div className="camera-config">
+        <div className="camera-config config-container">
             <h2 className="heading">Camera</h2>
             <div className="config-form">
                 <div className="form-input">

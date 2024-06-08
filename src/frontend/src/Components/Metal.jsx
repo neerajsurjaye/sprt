@@ -28,7 +28,7 @@ const Metal = (props) => {
 
     return (
         <div action="metal-form">
-            <label>Color</label>
+            <label className="form-title">Color</label>
 
             <div className="color">
                 <div className="form-input">

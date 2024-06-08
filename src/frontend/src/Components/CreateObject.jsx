@@ -52,7 +52,7 @@ const CreateObject = (props) => {
     };
 
     return (
-        <div className="create-object flex center column child-width-100">
+        <div className="create-object create flex center column child-width-100">
             <div className="form-input">
                 <label>ObjectType</label>
                 <select onChange={generateObjectForm}>

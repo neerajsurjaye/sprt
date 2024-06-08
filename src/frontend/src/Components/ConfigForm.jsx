@@ -35,7 +35,7 @@ const ConfigForm = (props) => {
                 <CameraConfig></CameraConfig>
             </div>
 
-            <div className="config-create">
+            <div className="config-create config-container">
                 <h2 className="heading">World</h2>
                 <div className="button-wrapper">
                     <input
@@ -51,11 +51,11 @@ const ConfigForm = (props) => {
                 </div>
             </div>
 
-            <div className="config-objects">
+            <div className="config-objects config-container">
                 <h4 className="heading">Objects</h4>
                 {objectConfigs}
             </div>
-            <div className="config-materials">
+            <div className="config-materials config-container">
                 <h4 className="heading">Materials</h4>
                 {materialConfigs}
             </div>
