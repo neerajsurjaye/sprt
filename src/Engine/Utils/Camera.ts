@@ -209,9 +209,42 @@ class Camera {
                 );
             }
 
-            // if(this.window){
-            //     this.window.webContents.send('image-rendered' , {image : image, width : this.imageWidth , height : j + 1});
-            // }
+            if (this.cb) {
+                this.cb("image-rendered", {
+                    image: image,
+                    width: this.imageWidth,
+                    height: j + 1,
+                });
+            }
+        }
+
+        return {
+            image: image,
+            width: this.imageWidth,
+            height: this.imageHeight,
+        };
+    }
+
+    renderNormal(world: Hittable): Object {
+        let image: Array<number> = [];
+
+        for (let j = 0; j < this.imageHeight; j++) {
+            console.log(`Lines remaining ${this.imageHeight - j} ---- Normal`);
+            for (let i = 0; i < this.imageWidth; i++) {
+                let pixelColor: Vec3 = new Vec3(0, 0, 0);
+
+                //explore the substraction part
+                let ray: Ray = this.getRay(i, j);
+                pixelColor = pixelColor.add(
+                    this.rayColorNormal(ray, this.maxDepth, world)
+                );
+
+                image.push(
+                    ...Color.writeColorVec(
+                        pixelColor.multiply(this.pixelSampleScale)
+                    )
+                );
+            }
 
             if (this.cb) {
                 this.cb("image-rendered", {
@@ -285,6 +318,22 @@ class Camera {
                 );
             }
             return new Color(0, 0, 0);
+        }
+
+        //colors world background
+        let unitDirection: Vec3 = ray.direction.unitVector();
+        let a: number = 0.5 * (unitDirection.y + 1); //transfrms -1 to 1 into 0 -> 1
+        return new Vec3(1, 1, 1)
+            .multiply(1.0 - a)
+            .add(new Vec3(0.5, 0.75, 1).multiply(a)); //see this part
+    }
+
+    rayColorNormal(ray: Ray, depth: number, world: Hittable): Vec3 {
+        if (depth <= 0) return new Vec3(0, 0, 0);
+
+        let rec: HitRecord = new HitRecord();
+        if (world.hit(ray, new Interval(0.001, Utils.INFINITY), rec)) {
+            return rec.normal;
         }
 
         //colors world background

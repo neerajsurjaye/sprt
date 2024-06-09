@@ -83,66 +83,44 @@ class Core {
 
         this.updateConfig(config);
 
-        // this.updateConfig({world : [
-        //     {
-        //         objectType : 'sphere',
-        //         locx : -2,
-        //         locy : 1,
-        //         locz : -2,
-        //         radius : 1,
-        //         material : {
-        //             materialType : 'lambertian',
-        //             color : {r : 0.2 , g : 0.9 , b : .2}
-        //         }
-        //     },
-        //     {
-        //         objectType : 'sphere',
-        //         locx : -1,
-        //         locy : 1,
-        //         locz : 1,
-        //         radius : 1,
-        //         material : {
-        //             materialType : 'dielectric',
-        //             ir : 1.33
-        //         }
-        //     },
-        //     {
-        //         objectType : 'sphere',
-        //         locx : -6,
-        //         locy : 4,
-        //         locz : 0,
-        //         radius : 4,
-        //         material : {
-        //             materialType : 'metal',
-        //             color : {r : 0.2 , g : .3 , b : 1},
-        //             fuzz : 0
-        //         }
-
-        //     },
-        //     {
-        //         objectType : 'sphere',
-        //         // location : {x : 0 , y : -10000 , z : 0},
-        //         locx : 0,
-        //         locy : -10000,
-        //         locz : 0,
-        //         radius : 10000,
-        //         material : {
-        //             materialType : 'lambertian',
-        //             color : {r : 1 , g : 0.2 , b : .2}
-        //         }
-        //     },
-        // ] , camera : {
-        //     aspectRatio : 16 / 9,
-        //     imageWidth : 400,
-        //     lookFrom : {x : 5 , y : .5 , z : 0},
-        //     lookAt : {x : 0 , y : 1 , z : 0},
-        //     vfov : 45,
-        //     samplePerPixel : 20,
-        //     defocusAngle : 0,
-        //     maxDepth : 8
-        // }});
-
         return this.camera.render(this.world);
+    }
+
+    renderNormal(channel: any, config: any): Object {
+        console.log("Rendering");
+
+        config = config ? config : {};
+        config.camera = config.camera
+            ? config.camera
+            : {
+                  aspectRatio: 16 / 9,
+                  imageWidth: 400,
+                  lookFrom: { x: 5, y: 5, z: 5 },
+                  lookAt: { x: 0, y: 0, z: 0 },
+                  vfov: 45,
+                  samplePerPixel: 5,
+                  defocusAngle: 0,
+                  maxDepth: 8,
+              };
+        config.world = config.world
+            ? config.world
+            : [
+                  {
+                      objectType: "sphere",
+                      locx: 0,
+                      locy: 0,
+                      locz: 0,
+                      radius: 1,
+                      material: {
+                          materialType: "lambertian",
+                          color: { r: 1, g: 0.9, b: 0.2 },
+                      },
+                  },
+              ];
+
+        this.updateConfig(config);
+
+        return this.camera.renderNormal(this.world);
     }
 
     renderImage(): void {

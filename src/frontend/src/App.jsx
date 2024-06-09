@@ -145,6 +145,7 @@ function App() {
 
     useEffect(() => {
         console.log(config);
+        reRender();
     }, [config]);
 
     return (

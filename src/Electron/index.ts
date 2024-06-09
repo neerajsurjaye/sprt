@@ -40,7 +40,7 @@ app.whenReady().then(() => {
 
     let sprt: Core = new Core(renderImage);
     ipcMain.handle("render", (event: any, config: any) => {
-        return sprt.render("channelx", config);
+        return sprt.renderNormal("channelx", config);
     });
     ipcMain.handle("refresh", (config: any) => {
         sprt.updateConfig(config);
