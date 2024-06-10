@@ -183,18 +183,22 @@ class Camera {
     }
 
     render(world: Hittable): Object {
-        let image: Array<number> = [];
+        // let image: Array<number> = [];
+        let image: Uint8ClampedArray = new Uint8ClampedArray(
+            this.imageHeight * this.imageWidth * 4
+        );
+        let idx: number = 0;
 
         for (let j = 0; j < this.imageHeight; j++) {
             console.log(`Lines remaining ${this.imageHeight - j} ----`);
             for (let i = 0; i < this.imageWidth; i++) {
                 let pixelColor: Vec3 = new Vec3(0, 0, 0);
-                let pixelCenter = this.pixel00Loc
-                    .add(this.pixelDeltaU.multiply(i))
-                    .add(this.pixelDeltaV.multiply(j));
+                // let pixelCenter = this.pixel00Loc
+                //     .add(this.pixelDeltaU.multiply(i))
+                //     .add(this.pixelDeltaV.multiply(j));
 
                 //explore the substraction part
-                let rayDirection = pixelCenter.substract(this.cameraCenter);
+                // let rayDirection = pixelCenter.substract(this.cameraCenter);
                 for (let sample = 0; sample < this.samplePerPixel; sample++) {
                     let ray: Ray = this.getRay(i, j);
                     pixelColor = pixelColor.add(
@@ -202,11 +206,15 @@ class Camera {
                     );
                 }
 
-                image.push(
-                    ...Color.writeColorVec(
-                        pixelColor.multiply(this.pixelSampleScale)
-                    )
+                let color = Color.writeColorVec(
+                    pixelColor.multiply(this.pixelSampleScale)
                 );
+                // image.push(...color);
+
+                image[idx++] = color[0];
+                image[idx++] = color[1];
+                image[idx++] = color[2];
+                image[idx++] = color[3];
             }
 
             if (this.cb) {
@@ -226,10 +234,16 @@ class Camera {
     }
 
     renderNormal(world: Hittable): Object {
-        let image: Array<number> = [];
+        // let image: Array<number> = [this.imageHeight * this.imageWidth * 4];
+        // let image: Array<number> = [];
+        let image: Uint8ClampedArray = new Uint8ClampedArray(
+            this.imageHeight * this.imageWidth * 4
+        );
+        let idx: number = 0;
+        console.log("render Normal");
 
         for (let j = 0; j < this.imageHeight; j++) {
-            console.log(`Lines remaining ${this.imageHeight - j} ---- Normal`);
+            // console.log(`Lines remaining ${this.imageHeight - j} ---- Normal`);
             for (let i = 0; i < this.imageWidth; i++) {
                 let pixelColor: Vec3 = new Vec3(0, 0, 0);
 
@@ -239,11 +253,15 @@ class Camera {
                     this.rayColorNormal(ray, this.maxDepth, world)
                 );
 
-                image.push(
-                    ...Color.writeColorVec(
-                        pixelColor.multiply(this.pixelSampleScale)
-                    )
+                let color = Color.writeColorVec(
+                    pixelColor.multiply(this.pixelSampleScale)
                 );
+                // image.push(...color);
+
+                image[idx++] = color[0];
+                image[idx++] = color[1];
+                image[idx++] = color[2];
+                image[idx++] = color[3];
             }
 
             if (this.cb) {

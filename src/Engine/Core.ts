@@ -83,7 +83,10 @@ class Core {
 
         this.updateConfig(config);
 
-        return this.camera.render(this.world);
+        console.time("render time");
+        let ret = this.camera.render(this.world);
+        console.time("render time");
+        return ret;
     }
 
     renderNormal(channel: any, config: any): Object {
@@ -120,7 +123,10 @@ class Core {
 
         this.updateConfig(config);
 
-        return this.camera.renderNormal(this.world);
+        console.time("render time");
+        let ret = this.camera.renderNormal(this.world);
+        console.timeEnd("render time");
+        return ret;
     }
 
     renderImage(): void {
