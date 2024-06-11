@@ -193,12 +193,7 @@ class Camera {
             console.log(`Lines remaining ${this.imageHeight - j} ----`);
             for (let i = 0; i < this.imageWidth; i++) {
                 let pixelColor: Vec3 = new Vec3(0, 0, 0);
-                // let pixelCenter = this.pixel00Loc
-                //     .add(this.pixelDeltaU.multiply(i))
-                //     .add(this.pixelDeltaV.multiply(j));
 
-                //explore the substraction part
-                // let rayDirection = pixelCenter.substract(this.cameraCenter);
                 for (let sample = 0; sample < this.samplePerPixel; sample++) {
                     let ray: Ray = this.getRay(i, j);
                     pixelColor = pixelColor.add(
@@ -241,6 +236,8 @@ class Camera {
         );
         let idx: number = 0;
         console.log("render Normal");
+        this.samplePerPixel = 8;
+        this.pixelSampleScale = 1 / this.samplePerPixel;
 
         for (let j = 0; j < this.imageHeight; j++) {
             // console.log(`Lines remaining ${this.imageHeight - j} ---- Normal`);
@@ -248,10 +245,15 @@ class Camera {
                 let pixelColor: Vec3 = new Vec3(0, 0, 0);
 
                 //explore the substraction part
-                let ray: Ray = this.getRay(i, j);
-                pixelColor = pixelColor.add(
-                    this.rayColorNormal(ray, this.maxDepth, world)
-                );
+
+                // console.log(this.samplePerPixel, typeof this.samplePerPixel);
+
+                for (let sample = 0; sample < this.samplePerPixel; sample++) {
+                    let ray: Ray = this.getRay(i, j);
+                    pixelColor = pixelColor.add(
+                        this.rayColorNormal(ray, this.maxDepth, world)
+                    );
+                }
 
                 let color = Color.writeColorVec(
                     pixelColor.multiply(this.pixelSampleScale)
