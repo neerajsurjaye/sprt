@@ -154,5 +154,11 @@ label {
 }
 
 .canvas {
-    width: 50%;
+    width: 100%;
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

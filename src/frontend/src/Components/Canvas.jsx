@@ -10,19 +10,38 @@ const Canvas = (props) => {
         if (!canvasRef?.current || !res) return;
 
         const canvas = canvasRef.current;
-        // canvas.width = res.width;
-        // canvas.height = res.height;
         let ctx = canvas.getContext("2d");
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        const tempCanvas = document.createElement("canvas");
+        let tempCtx = tempCanvas.getContext("2d");
         let palette = new ImageData(
             new Uint8ClampedArray(res.image),
-            res.width
-            // res.height
+            res.width,
+            res.height
         );
-        ctx.putImageData(palette, 0, 0);
+        tempCanvas.width = res.width;
+        tempCanvas.height = res.height;
+        tempCtx.putImageData(palette, 0, 0);
+
+        ctx.drawImage(
+            tempCanvas,
+            0,
+            0,
+            res.width,
+            res.height,
+            0,
+            0,
+            canvasWidth,
+            canvasHeight
+        );
     }, [props.res]);
 
     return (
-        <canvas className={props.className} ref={canvasRef} {...props}></canvas>
+        <div className={props.className + " canvas-container"}>
+            <canvas ref={canvasRef} {...props}></canvas>
+        </div>
     );
 };
 

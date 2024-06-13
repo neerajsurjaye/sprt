@@ -151,7 +151,10 @@ function App() {
     return (
         <ConfigContext.Provider value={{ config, setConfig }}>
             <div className="App flex">
-                <Canvas res={response} className="flex-2 canvas"></Canvas>
+                <Canvas
+                    res={response}
+                    className="flex-2 canvas canvasMain"
+                ></Canvas>
                 <div className="configs flex-1">
                     <ConfigForm useConfig={[config, setConfig]}></ConfigForm>
                     <input
