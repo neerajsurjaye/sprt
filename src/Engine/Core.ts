@@ -84,7 +84,7 @@ class Core {
         this.updateConfig(config);
 
         console.time("render time");
-        let ret = this.camera.renderNormal(this.world);
+        let ret = this.camera.render(this.world);
         console.timeEnd("render time");
         return ret;
     }

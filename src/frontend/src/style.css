@@ -91,6 +91,8 @@
     background-color: var(--background);
     color: var(--text);
     padding: 4px;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 input[type="text"],
@@ -161,4 +163,17 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--background-form);
+}
+
+.tabs {
+    background-color: var(--background);
+    padding: 4px;
+    display: flex;
+    position: sticky;
+    top: 0px;
+}
+
+.tab-button {
+    width: 100%;
 }
