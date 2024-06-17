@@ -14,13 +14,13 @@ const Dielectric = (props) => {
     }, [ir]);
 
     return (
-        <div className="dielectric-form form-input">
+        <div className="dielectric-form form-input ">
             <label htmlFor="Refraction Index">Refraction Index</label>
             <input
                 type="number"
                 value={ir}
                 onChange={(event) => {
-                    setIr(Number(event.target.value));
+                    setIr(event.target.value);
                 }}
             />
         </div>

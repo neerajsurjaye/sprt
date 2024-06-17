@@ -6,7 +6,7 @@ const Lambertian = (props) => {
 
     let updateColor = (event) => {
         let newColor = { ...color };
-        newColor[event.target.name] = Number(event.target.value);
+        newColor[event.target.name] = event.target.value;
         setColor(newColor);
     };
 
@@ -20,7 +20,7 @@ const Lambertian = (props) => {
     }, [color]);
 
     return (
-        <div action="lambertian-form">
+        <div action="lambertian-form ">
             <label className="form-title">Color</label>
 
             <div className="color">

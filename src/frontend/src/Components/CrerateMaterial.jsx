@@ -68,7 +68,7 @@ const CreateMaterial = (props) => {
     }, [materialConfig]);
 
     return (
-        <form className="create-material flex center column child-width-100">
+        <form className="create-material flex center column child-width-100 material-form">
             <div className="form-input">
                 <label htmlFor="materialName">MaterialName</label>
                 <input

@@ -230,6 +230,7 @@ const App = () => {
                         name="editor"
                         onClick={() => {
                             setDisplayState("editor");
+                            setConfig({ ...config });
                         }}
                     />
                     <input

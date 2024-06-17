@@ -7,7 +7,7 @@ const Metal = (props) => {
 
     let updateColor = (event) => {
         let newColor = { ...color };
-        newColor[event.target.name] = Number(event.target.value);
+        newColor[event.target.name] = event.target.value;
         setColor(newColor);
     };
 
@@ -27,7 +27,7 @@ const Metal = (props) => {
     }, [fuzz, color]);
 
     return (
-        <div action="metal-form">
+        <div action="metal-form ">
             <label className="form-title">Color</label>
 
             <div className="color">
@@ -67,7 +67,7 @@ const Metal = (props) => {
                     value={fuzz}
                     name="fuzz"
                     onChange={(event) => {
-                        setFuzz(Number(event.target.value));
+                        setFuzz(event.target.value);
                     }}
                 />
             </div>

@@ -36,7 +36,7 @@ const ConfigForm = (props) => {
             </div>
 
             <div className="config-create config-container">
-                <h2 className="heading">World</h2>
+                <h2 className="heading">WORLD</h2>
                 <div className="button-wrapper">
                     <input
                         type="button"
@@ -52,11 +52,11 @@ const ConfigForm = (props) => {
             </div>
 
             <div className="config-objects config-container">
-                <h4 className="heading">Objects</h4>
+                <h4 className="heading">OBJECTS</h4>
                 {objectConfigs}
             </div>
             <div className="config-materials config-container">
-                <h4 className="heading">Materials</h4>
+                <h4 className="heading">MATERIALS</h4>
                 {materialConfigs}
             </div>
         </form>

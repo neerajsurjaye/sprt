@@ -34,7 +34,7 @@ const SphereForm = (props) => {
 
     let updateConfig = (event) => {
         let newConfig = { ...sphereConfig };
-        newConfig[event.target.name] = Number(event.target.value);
+        newConfig[event.target.name] = event.target.value;
         setSphereConfig(newConfig);
     };
 

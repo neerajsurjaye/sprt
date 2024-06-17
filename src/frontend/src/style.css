@@ -177,3 +177,10 @@ label {
 .tab-button {
     width: 100%;
 }
+
+.material-form {
+    border-top: 2px solid var(--background);
+    border-bottom: 2px solid var(--background);
+    padding-top: 8px;
+    padding-bottom: 8px;
+}

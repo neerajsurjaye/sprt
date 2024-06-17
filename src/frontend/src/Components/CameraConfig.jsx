@@ -19,7 +19,7 @@ const CameraConfig = (props) => {
     const updateCameraConfig = (event) => {
         let name = event.target.name;
         let newCameraConfig = { ...cameraConfig };
-        newCameraConfig[name] = Number(event.target.value);
+        newCameraConfig[name] = event.target.value;
         setCameraConfig(newCameraConfig);
     };
 
@@ -29,9 +29,7 @@ const CameraConfig = (props) => {
         let configCoordinateName = name.split("-")[1];
         let newCameraConfig = { ...cameraConfig };
 
-        newCameraConfig[configName][configCoordinateName] = Number(
-            event.target.value
-        );
+        newCameraConfig[configName][configCoordinateName] = event.target.value;
         setCameraConfig(newCameraConfig);
     };
 
@@ -145,7 +143,7 @@ const CameraConfig = (props) => {
                 <div className="form-input">
                     <label htmlFor="defocusAngle">Defocus Angle </label>
                     <input
-                        type="text"
+                        type="number"
                         name="defocusAngle"
                         value={cameraConfig.defocusAngle}
                         onChange={updateCameraConfig}
@@ -155,7 +153,7 @@ const CameraConfig = (props) => {
                 <div className="form-input">
                     <label htmlFor="samplePerPixel">Sample Per pixel </label>
                     <input
-                        type="text"
+                        type="number"
                         name="samplePerPixel"
                         value={cameraConfig.samplePerPixel}
                         onChange={updateCameraConfig}
@@ -164,7 +162,7 @@ const CameraConfig = (props) => {
                 <div className="form-input">
                     <label htmlFor="maxDepth">Max Depth </label>
                     <input
-                        type="text"
+                        type="number"
                         name="maxDepth"
                         value={cameraConfig.maxDepth}
                         onChange={updateCameraConfig}
