@@ -18,6 +18,9 @@ const CanvasOutput = (props) => {
             res.height
         );
 
+        canvas.width = res.width;
+        canvas.height = res.height;
+
         ctx.putImageData(palette, 0, 0);
     }, [props.res]);
 

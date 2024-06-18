@@ -1,6 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Canvas from "./Canvas";
 import ConfigContext from "../Context/ConfigContext";
+import CanvasOutput from "./CanvasOutput";
 
 const Output = () => {
     const { config, setConfig, response, reRender, setResponse } =
@@ -8,16 +9,19 @@ const Output = () => {
     const [loading, setLoading] = useState(0);
     const outputDisplay = [
         <div>Loading</div>,
-        <Canvas res={response} className="flex-2 canvas canvasMain"></Canvas>,
+        <CanvasOutput
+            res={response}
+            className="flex-2 canvas canvasMain"
+        ></CanvasOutput>,
     ];
 
     let isLoading = () => {
         return response == null;
     };
 
-    useState(() => {
+    useEffect(() => {
         reRender();
-    });
+    }, []);
 
     return <div className="App flex">{outputDisplay[1]}</div>;
 };

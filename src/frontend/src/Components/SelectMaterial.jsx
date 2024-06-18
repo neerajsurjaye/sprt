@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-let SelectMaterial = () => {
+const SelectMaterial = () => {
     let [materials, setMaterials] = useState(["NONE", "temporaryMaterial"]);
 
     let geneateMaterialOptions = () => {
