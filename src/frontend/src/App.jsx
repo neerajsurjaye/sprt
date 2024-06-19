@@ -117,7 +117,7 @@ const App = () => {
 
         if (finalConfig.camera) {
             requestConfig.camera = { ...finalConfig.camera };
-            requestConfig.camera.imageWidth = 400;
+            requestConfig.camera.imageWidth = 300;
         }
         if (finalConfig.world) requestConfig.world = finalConfig.world;
 

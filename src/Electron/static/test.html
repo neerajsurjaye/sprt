@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h2>Test</h2>
+        <canvas id="target"></canvas>
+    </body>
+    <script>
+        console.log("Started");
+        let canvas = document.getElementById("target");
+        let ctx = canvas.getContext("2d");
+
+        const createFinalConfig = (config) => {
+            let finalConfig = {};
+            finalConfig.camera = config.camera;
+
+            let world = [];
+
+            for (let key in config.world) {
+                let object = config.world[key];
+                let objMaterialName = object.materialName;
+
+                let materials = config.materials;
+                let materialsArray = Object.values(materials);
+                let selectedMaterial = materialsArray.filter(
+                    (mat) => mat.name == objMaterialName
+                );
+
+                if (selectedMaterial.length > 0)
+                    object.material = selectedMaterial[0];
+
+                world.push(object);
+            }
+
+            finalConfig.world = world;
+            return finalConfig;
+        };
+
+        let requestConfig = {
+            world: [
+                {
+                    objectType: "sphere",
+                    locx: 0,
+                    locy: 0,
+                    locz: 0,
+                    radius: 1,
+                    material: {
+                        materialType: "lambertian",
+                        color: { r: 0.2, g: 0.9, b: 0.2 },
+                    },
+                },
+                {
+                    objectType: "sphere",
+                    locx: -1,
+                    locy: 1,
+                    locz: 1,
+                    radius: 1,
+                    material: {
+                        materialType: "dielectric",
+                        ir: 1.33,
+                    },
+                },
+                {
+                    objectType: "sphere",
+                    locx: -6,
+                    locy: 4,
+                    locz: 0,
+                    radius: 4,
+                    material: {
+                        materialType: "metal",
+                        color: { r: 0.2, g: 0.3, b: 1 },
+                        fuzz: 0,
+                    },
+                },
+                {
+                    objectType: "sphere",
+                    locx: 0,
+                    locy: -10000,
+                    locz: 0,
+                    radius: 10000,
+                    material: {
+                        materialType: "lambertian",
+                        color: { r: 1, g: 0.2, b: 0.2 },
+                    },
+                },
+            ],
+            camera: {
+                aspectRatio: 16 / 9,
+                imageWidth: 800,
+                lookFrom: { x: 5, y: 5, z: 5 },
+                lookAt: { x: 0, y: 0, z: 0 },
+                vfov: 45,
+                samplePerPixel: 6,
+                defocusAngle: 0,
+                maxDepth: 4,
+            },
+        };
+
+        // const finalConfig = createFinalConfig(requestConfig);
+
+        // if (finalConfig.camera) requestConfig.camera = finalConfig.camera;
+        // if (finalConfig.world) requestConfig.world = finalConfig.world;
+
+        console.log("Request COnfig1 ", { requestConfig });
+        window.sprt.render(requestConfig).then((res) => {
+            let palette = new ImageData(
+                new Uint8ClampedArray(res.image),
+                res.width,
+                res.height
+            );
+
+            canvas.width = res.width;
+            canvas.height = res.height;
+
+            ctx.putImageData(palette, 0, 0);
+        });
+    </script>
+</html>

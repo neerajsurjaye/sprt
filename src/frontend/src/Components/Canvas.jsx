@@ -9,8 +9,6 @@ const Canvas = (props) => {
 
         const canvas = canvasRef.current;
         let ctx = canvas.getContext("2d");
-        const canvasWidth = canvas.width;
-        const canvasHeight = canvas.height;
 
         const tempCanvas = document.createElement("canvas");
         let tempCtx = tempCanvas.getContext("2d");
@@ -19,21 +17,10 @@ const Canvas = (props) => {
             res.width,
             res.height
         );
-        tempCanvas.width = res.width;
-        tempCanvas.height = res.height;
-        tempCtx.putImageData(palette, 0, 0);
+        canvas.width = res.width;
+        canvas.height = res.height;
 
-        ctx.drawImage(
-            tempCanvas,
-            0,
-            0,
-            res.width,
-            res.height,
-            0,
-            0,
-            canvasWidth,
-            canvasHeight
-        );
+        ctx.putImageData(palette, 0, 0);
     }, [props.res]);
 
     return (

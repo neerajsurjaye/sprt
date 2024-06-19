@@ -1,3 +1,4 @@
+import { join } from "path";
 import Core from "../Engine/Core";
 
 import { BrowserWindow, app, ipcMain, screen } from "electron";
@@ -17,10 +18,12 @@ const createWindow = (): void => {
     });
 
     const startURL = "http://localhost:3000/";
-    // const startURL =`file://${path.join(__dirname, "../../frontend/build/index.html")}`;
+    // const startURL = join(__dirname, "/static/test.html");
+    // const startURL = "D:/Coding/sprt/build/Electron/test.html";
 
     win.webContents.openDevTools();
     win.loadURL(startURL);
+    // win.loadFile(startURL);
 };
 
 app.on("window-all-closed", () => {
