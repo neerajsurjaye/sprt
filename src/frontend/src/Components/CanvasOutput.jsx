@@ -25,7 +25,7 @@ const CanvasOutput = (props) => {
     }, [props.res]);
 
     return (
-        <div className={props.className + " canvas-container"}>
+        <div className={props.className + " canvas-container canvas-output"}>
             <canvas ref={canvasRef} {...props}></canvas>
         </div>
     );

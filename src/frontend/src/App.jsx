@@ -3,6 +3,7 @@ import "./style.css";
 import ConfigContext from "./Context/ConfigContext";
 import { useEffect, useState } from "react";
 import Output from "./Components/Output";
+import Header from "./Components/Header";
 
 const App = () => {
     let [response, setResponse] = useState(null);
@@ -225,6 +226,7 @@ const App = () => {
             }}
         >
             <div>
+                <Header></Header>
                 <div className="tabs">
                     <input
                         type="button"

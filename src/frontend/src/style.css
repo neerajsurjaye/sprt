@@ -188,7 +188,7 @@ label {
 .loading {
     width: 100%;
     /* height: 100%; */
-    background-color: blueviolet;
+    background-color: var(--background-input);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -203,4 +203,40 @@ label {
 .sprt-loading {
     font-size: 4rem;
     font-weight: bolder;
+}
+
+.header {
+    padding-left: 16px;
+    background-color: var(--background);
+    color: white;
+    font-weight: bolder;
+}
+
+.sprt-loading {
+    animation: rotate 2s infinite cubic-bezier(0, 0, 1, 1);
+}
+
+.square {
+    border: 16px solid rgba(1, 1, 1, 0.2);
+    border-radius: 25%;
+    padding: 16px;
+    animation: rotate 4s infinite cubic-bezier(0, 0, 1, 1);
+}
+
+.canvas-output {
+    overflow: scroll;
+}
+
+@keyframes rotate {
+    0% {
+        rotate: 1 0 1 0deg;
+    }
+
+    50% {
+        rotate: 1 1 1 180deg;
+    }
+
+    100% {
+        rotate: 1 1 1 360deg;
+    }
 }
