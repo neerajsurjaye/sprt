@@ -14,7 +14,10 @@
         "clone-start": "npm run clone && npm run start",
         "compile-clone": "npm run compile && npm run clone",
         "execute-app": "npm run compile && npm run clone && npm run start",
-        "run-frontend": "cd src/frontend && npm start"
+        "build-frontend": "cd ./src/frontend/ && npm run build",
+        "dev": "npm run compile-clone && npm run clone && cross-env DEVELOPMENT=true npm run start",
+        "run-frontend": "cd src/frontend && npm start",
+        "build": "npm run build-frontend && npm run make"
     },
     "author": "Neeraj Surjaye",
     "license": "MIT",
@@ -34,6 +37,7 @@
     "dependencies": {
         "copyfiles": "^2.4.1",
         "cpx2": "^7.0.1",
+        "cross-env": "^7.0.3",
         "electron-is-dev": "^3.0.1",
         "electron-squirrel-startup": "^1.0.0"
     }

@@ -35,6 +35,7 @@ const CameraConfig = (props) => {
 
     useEffect(() => {
         let newConfig = { ...config };
+        console.log({ cameraConfig });
         newConfig["camera"] = cameraConfig;
         setConfig(newConfig);
     }, [cameraConfig]);

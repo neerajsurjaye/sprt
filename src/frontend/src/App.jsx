@@ -26,9 +26,26 @@ const App = () => {
         render: <Output></Output>,
     };
 
-    const createFinalConfig = () => {
+    const createFinalConfig = (requestConfig) => {
         let finalConfig = {};
-        finalConfig.camera = config.camera;
+        finalConfig.camera = { ...config.camera };
+
+        if (finalConfig?.camera?.lookAt) {
+            let lookAt = finalConfig.camera.lookAt;
+            lookAt = { ...lookAt };
+            lookAt.x = Number(lookAt.x);
+            lookAt.y = Number(lookAt.y);
+            lookAt.z = Number(lookAt.z);
+            finalConfig.camera.lookAt = lookAt;
+        }
+        if (finalConfig?.camera?.lookFrom) {
+            let lookFrom = finalConfig.camera.lookFrom;
+            lookFrom = { ...lookFrom };
+            lookFrom.x = Number(lookFrom.x);
+            lookFrom.y = Number(lookFrom.y);
+            lookFrom.z = Number(lookFrom.z);
+            finalConfig.camera.lookFrom = lookFrom;
+        }
 
         let world = [];
 
@@ -114,7 +131,7 @@ const App = () => {
             },
         };
 
-        const finalConfig = createFinalConfig();
+        const finalConfig = createFinalConfig(requestConfig);
 
         if (finalConfig.camera) {
             requestConfig.camera = { ...finalConfig.camera };
@@ -190,7 +207,7 @@ const App = () => {
             },
         };
 
-        const finalConfig = createFinalConfig();
+        const finalConfig = createFinalConfig(requestConfig);
 
         if (finalConfig.camera) requestConfig.camera = finalConfig.camera;
         if (finalConfig.world) requestConfig.world = finalConfig.world;
