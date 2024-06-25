@@ -5,8 +5,6 @@ const CanvasOutput = (props) => {
     const res = props.res;
 
     useEffect(() => {
-        //todo props should set the data of canvas
-
         if (!canvasRef?.current || !res) return;
 
         const canvas = canvasRef.current;

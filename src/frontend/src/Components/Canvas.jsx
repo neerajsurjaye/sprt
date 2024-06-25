@@ -10,8 +10,6 @@ const Canvas = (props) => {
         const canvas = canvasRef.current;
         let ctx = canvas.getContext("2d");
 
-        const tempCanvas = document.createElement("canvas");
-        let tempCtx = tempCanvas.getContext("2d");
         let palette = new ImageData(
             new Uint8ClampedArray(res.image),
             res.width,

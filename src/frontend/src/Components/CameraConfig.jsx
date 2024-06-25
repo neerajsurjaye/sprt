@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import ConfigContext from "../Context/ConfigContext";
 
 const CameraConfig = (props) => {
-    // let [config, setConfig] = props.useConfig;
     const { config, setConfig } = useContext(ConfigContext);
 
     let [cameraConfig, setCameraConfig] = useState({
@@ -66,31 +65,36 @@ const CameraConfig = (props) => {
 
                 <div>
                     <div className="coordinates">
-                        <label className="form-title">lookFrom</label>
-                        <div className="form-input">
-                            <label>x</label>
+                        <label className="form-title" htmlFor="form-inpu">
+                            lookFrom
+                        </label>
+                        <div className="form-input" id="form-input">
+                            <label htmlFor="lookFrom-x">x</label>
                             <input
                                 type="number"
                                 value={cameraConfig.lookFrom.x}
                                 name="lookFrom-x"
+                                id="lookFrom-x"
                                 onChange={updateCameraConfigVectors}
                             />
                         </div>
                         <div className="form-input">
-                            <label>y</label>
+                            <label htmlFor="lookFrom-y">y</label>
                             <input
                                 type="number"
                                 value={cameraConfig.lookFrom.y}
                                 name="lookFrom-y"
+                                id="lookFrom-y"
                                 onChange={updateCameraConfigVectors}
                             />
                         </div>
                         <div className="form-input">
-                            <label>z</label>
+                            <label htmlFor="lookFrom-z">z</label>
                             <input
                                 type="number"
                                 value={cameraConfig.lookFrom.z}
                                 name="lookFrom-z"
+                                id="lookFrom-z"
                                 onChange={updateCameraConfigVectors}
                             />
                         </div>
@@ -99,33 +103,38 @@ const CameraConfig = (props) => {
 
                 <div>
                     <div className="coordinates">
-                        <label className="form-title">look-at</label>
+                        <label htmlFor="form-input" className="form-title">
+                            look-at
+                        </label>
 
                         <div className="form-input">
-                            <label>x</label>
+                            <label htmlFor="lookAt-x">x</label>
                             <input
                                 type="number"
                                 value={cameraConfig.lookAt.x}
                                 name="lookAt-x"
+                                id="lookAt-x"
                                 onChange={updateCameraConfigVectors}
                             />
                         </div>
 
                         <div className="form-input">
-                            <label>y</label>
+                            <label htmlFor="lookAt-y">y</label>
                             <input
                                 type="number"
                                 value={cameraConfig.lookAt.y}
                                 name="lookAt-y"
+                                id="lookAt-y"
                                 onChange={updateCameraConfigVectors}
                             />
                         </div>
                         <div className="form-input">
-                            <label>z</label>
+                            <label htmlFor="lookAt-z">z</label>
                             <input
                                 type="number"
                                 value={cameraConfig.lookAt.z}
                                 name="lookAt-z"
+                                id="lookAt-y"
                                 onChange={updateCameraConfigVectors}
                             />
                         </div>

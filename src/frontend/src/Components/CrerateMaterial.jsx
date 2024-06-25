@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import SphereForm from "./SphereForm";
+import ConfigContext from "../Context/ConfigContext";
 import Dielectric from "./Dielectric";
 import Lambertian from "./Lambertian";
 import Metal from "./Metal";
-import ConfigContext from "../Context/ConfigContext";
 
 const CreateMaterial = (props) => {
     let idx = props.idx;
@@ -86,8 +85,9 @@ const CreateMaterial = (props) => {
             </div>
 
             <div className="form-input">
-                <label>MaterialType</label>
+                <label htmlFor="material-options">MaterialType</label>
                 <select
+                    id="material-options"
                     onChange={(event) => {
                         setMaterialName(event.target.value);
                     }}

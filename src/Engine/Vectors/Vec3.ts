@@ -1,7 +1,7 @@
 import Utils from "../Utils/Utils";
 
 class Vec3 {
-    //* Not Tested *// 
+    //* Not Tested *//
 
     //defines xyz of vector
     vec: Array<number>;
@@ -35,7 +35,7 @@ class Vec3 {
     }
 
     add(adder: Vec3): Vec3 {
-        let ret : Vec3 = new Vec3(0 , 0 , 0);
+        let ret: Vec3 = new Vec3(0, 0, 0);
         ret.x = this.x + adder.x;
         ret.y = this.y + adder.y;
         ret.z = this.z + adder.z;
@@ -43,41 +43,34 @@ class Vec3 {
     }
 
     substract(sub: Vec3): Vec3 {
-        let ret : Vec3 = new Vec3(0 , 0 , 0);
+        let ret: Vec3 = new Vec3(0, 0, 0);
         ret.x = this.x - sub.x;
         ret.y = this.y - sub.y;
         ret.z = this.z - sub.z;
         return ret;
-
-        //this.add(sub.multiply(-1));
     }
 
     multiply(mul: number): Vec3 {
-        let ret : Vec3 = new Vec3(0 , 0 , 0);
+        let ret: Vec3 = new Vec3(0, 0, 0);
 
         ret.x = this.x * mul;
         ret.y = this.y * mul;
         ret.z = this.z * mul;
         return ret;
-
     }
 
     multiplyVec(mul: Vec3): Vec3 {
-        let ret : Vec3 = new Vec3(0 , 0 , 0);
+        let ret: Vec3 = new Vec3(0, 0, 0);
 
         ret.x = this.x * mul.x;
         ret.y = this.y * mul.y;
         ret.z = this.z * mul.z;
         return ret;
-
     }
 
-    
-
-    divide(div: number) : Vec3{
+    divide(div: number): Vec3 {
         return this.multiply(1 / div);
     }
-
 
     lengthSquared(): number {
         return this.x * this.x + this.y * this.y + this.z * this.z;
@@ -91,71 +84,87 @@ class Vec3 {
         return this.x * inp.x + this.y * inp.y + this.z * inp.z;
     }
 
-    cross(inp : Vec3) : Vec3{
+    cross(inp: Vec3): Vec3 {
         return new Vec3(
             this.y * inp.z - this.z * inp.y,
             this.z * inp.x - this.x * inp.z,
             this.x * inp.y - this.y * inp.x
-        )
+        );
     }
 
-    unitVector() : Vec3{
+    unitVector(): Vec3 {
         return this.divide(this.length());
     }
 
-    static random() : Vec3{
-        return new Vec3(Utils.randomDouble() , Utils.randomDouble() , Utils.randomDouble());
+    static random(): Vec3 {
+        return new Vec3(
+            Utils.randomDouble(),
+            Utils.randomDouble(),
+            Utils.randomDouble()
+        );
     }
 
-    static randomRange(min : number , max : number) : Vec3{
-        return new Vec3(Utils.randomDoubleRange(min , max) , Utils.randomDoubleRange(min , max), Utils.randomDoubleRange(min , max));
+    static randomRange(min: number, max: number): Vec3 {
+        return new Vec3(
+            Utils.randomDoubleRange(min, max),
+            Utils.randomDoubleRange(min, max),
+            Utils.randomDoubleRange(min, max)
+        );
     }
 
-    static randomInUnitSphere() : Vec3{
-        while(true){
-            let p : Vec3 = Vec3.randomRange(-1 , 1);
-            if(p.lengthSquared() < 1){
+    static randomInUnitSphere(): Vec3 {
+        while (true) {
+            let p: Vec3 = Vec3.randomRange(-1, 1);
+            if (p.lengthSquared() < 1) {
                 return p;
             }
         }
     }
 
-    static randomUnitVector() : Vec3{
+    static randomUnitVector(): Vec3 {
         return this.randomInUnitSphere().unitVector();
     }
 
-    static randomOnHemisphere(normal : Vec3) : Vec3{
-        let onUnitSphere : Vec3 = this.randomUnitVector();
-        if(onUnitSphere.dot(normal) > 0){
+    static randomOnHemisphere(normal: Vec3): Vec3 {
+        let onUnitSphere: Vec3 = this.randomUnitVector();
+        if (onUnitSphere.dot(normal) > 0) {
             return onUnitSphere;
         }
         return onUnitSphere.multiply(-1);
     }
 
-    nearZero() : boolean{
+    nearZero(): boolean {
         let s = 1e-8;
-        return (Math.abs(this.x) < s && Math.abs(this.y) < s && Math.abs(this.z) < s);
+        return (
+            Math.abs(this.x) < s && Math.abs(this.y) < s && Math.abs(this.z) < s
+        );
     }
 
-    static reflect(v : Vec3 , n : Vec3){
+    static reflect(v: Vec3, n: Vec3) {
         return v.substract(n.multiply(v.dot(n)).multiply(2));
     }
 
-    static refract(uv : Vec3 , n : Vec3 , etaiOverEtat : number){
-        let cosTheta : number = Math.min(uv.multiply(-1).dot(n) , 1);
-        let rOutPerp : Vec3 = uv.add(n.multiply(cosTheta)).multiply(etaiOverEtat);
-        let rOutParallel : Vec3 = n.multiply(-1 * Math.sqrt(Math.abs(1 - rOutPerp.lengthSquared())));
+    static refract(uv: Vec3, n: Vec3, etaiOverEtat: number) {
+        let cosTheta: number = Math.min(uv.multiply(-1).dot(n), 1);
+        let rOutPerp: Vec3 = uv
+            .add(n.multiply(cosTheta))
+            .multiply(etaiOverEtat);
+        let rOutParallel: Vec3 = n.multiply(
+            -1 * Math.sqrt(Math.abs(1 - rOutPerp.lengthSquared()))
+        );
         return rOutPerp.add(rOutParallel);
     }
 
-    static randomInUnitDisc() : Vec3{
-        while(true){
-            let p : Vec3 = new Vec3(Utils.randomDoubleRange(-1 , 1) , Utils.randomDoubleRange(-1 , 1) , 0);
-            if(p.lengthSquared() < 1) return p;
+    static randomInUnitDisc(): Vec3 {
+        while (true) {
+            let p: Vec3 = new Vec3(
+                Utils.randomDoubleRange(-1, 1),
+                Utils.randomDoubleRange(-1, 1),
+                0
+            );
+            if (p.lengthSquared() < 1) return p;
         }
     }
-
-
 }
 
 export default Vec3;

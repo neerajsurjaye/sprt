@@ -1,16 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import Canvas from "./Canvas";
 import ConfigContext from "../Context/ConfigContext";
 import CanvasOutput from "./CanvasOutput";
 import Loading from "./Loading";
 
 const Output = () => {
-    const { config, setConfig, response, reRender, setResponse } =
-        useContext(ConfigContext);
+    const { response, reRender } = useContext(ConfigContext);
     const [loading, setLoading] = useState(true);
     const outputDisplay = [
-        <Loading></Loading>,
+        <Loading key={"loading"}></Loading>,
         <CanvasOutput
+            key="canvasOutput"
             res={response}
             className="flex-2 canvas canvasMain"
         ></CanvasOutput>,

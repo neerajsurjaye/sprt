@@ -40,7 +40,7 @@ class Dielectric extends Material {
         let sniTheta: number = Math.sqrt(1 - cosTheta * cosTheta);
 
         let cannotRefract: boolean = ri * sniTheta > 1;
-        let direction: Vec3 = new Vec3(0, 0, 0);
+        let direction: Vec3;
 
         if (
             cannotRefract ||

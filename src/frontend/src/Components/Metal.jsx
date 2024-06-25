@@ -11,11 +11,6 @@ const Metal = (props) => {
         setColor(newColor);
     };
 
-    // useEffect(() => {
-    //     console.log("metalColor", materialConfig, color);
-    //     setMaterialConfig({ ...materialConfig, color: color });
-    // }, [color]);
-
     useEffect(() => {
         console.log("metalFuzz", materialConfig, fuzz);
         setMaterialConfig({

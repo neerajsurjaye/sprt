@@ -1,4 +1,4 @@
-let Header = () => {
+const Header = () => {
     return <div className="header">SPRT</div>;
 };
 

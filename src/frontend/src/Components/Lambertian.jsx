@@ -21,33 +21,38 @@ const Lambertian = (props) => {
 
     return (
         <div action="lambertian-form ">
-            <label className="form-title">Color</label>
+            <label htmlFor="color" className="form-title">
+                Color
+            </label>
 
-            <div className="color">
+            <div className="color" id="color">
                 <div className="form-input">
-                    <label>R</label>
+                    <label htmlFor="r">R</label>
                     <input
                         type="number"
                         value={color.r}
                         name="r"
+                        id="r"
                         onChange={updateColor}
                     />
                 </div>
                 <div className="form-input">
-                    <label>G</label>
+                    <label htmlFor="g">G</label>
                     <input
                         type="number"
                         value={color.g}
                         name="g"
+                        id="g"
                         onChange={updateColor}
                     />
                 </div>
                 <div className="form-input">
-                    <label>B</label>
+                    <label htmlFor="b">B</label>
                     <input
                         type="number"
                         value={color.b}
                         name="b"
+                        id="b"
                         onChange={updateColor}
                     />
                 </div>

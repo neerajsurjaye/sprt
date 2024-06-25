@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
+import CameraConfig from "./CameraConfig";
 import CreateObject from "./CreateObject";
 import CreateMaterial from "./CrerateMaterial";
-import CameraConfig from "./CameraConfig";
-import ConfigContext from "../Context/ConfigContext";
 
 const ConfigForm = (props) => {
     let [objectConfigs, setObjectConfigs] = useState([]);

@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import SelectMaterial from "./SelectMaterial";
 import ConfigContext from "../Context/ConfigContext";
 
 const SphereForm = (props) => {
@@ -17,7 +16,7 @@ const SphereForm = (props) => {
 
     let getMaterialOptions = () => {
         let matOptions = [
-            <option value={"NONE"} name={"materialName"}>
+            <option key="none" value={"NONE"} name={"materialName"}>
                 NONE
             </option>,
         ];
