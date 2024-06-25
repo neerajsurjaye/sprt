@@ -15,20 +15,15 @@ const createWindow = (): void => {
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
         },
-        icon: path.join(__dirname, "favicon.ico"),
+        icon: path.join(__dirname, "/static/favicon.ico"),
     });
-
-    // console.log("env : ", process.env);
 
     let startURL = null;
     if (process.env["DEVELOPMENT"] == "true")
         startURL = "http://localhost:3000/";
     else startURL = `file://${join(__dirname, "../frontend/index.html")}`;
-    // const startURL = "D:/Coding/sprt/build/Electron/test.html";
 
-    win.webContents.openDevTools();
     win.loadURL(startURL);
-    // win.loadFile(startURL);
 };
 
 app.on("window-all-closed", () => {

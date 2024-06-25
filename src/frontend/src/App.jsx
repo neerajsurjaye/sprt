@@ -69,7 +69,6 @@ const App = () => {
         return finalConfig;
     };
 
-    //todo rerender should create the final config from config
     let reRenderNormals = () => {
         let requestConfig = {
             world: [
@@ -213,10 +212,6 @@ const App = () => {
         if (finalConfig.world) requestConfig.world = finalConfig.world;
 
         console.log({ requestConfig });
-        // window.sprt.render(requestConfig).then((res) => {
-        //     console.log("app.jsx rerender", res);
-        //     setResponse(res);
-        // });
 
         const res = await window.sprt.render(requestConfig);
         setResponse(res);

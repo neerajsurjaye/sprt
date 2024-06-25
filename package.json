@@ -17,7 +17,7 @@
         "build-frontend": "cd ./src/frontend/ && npm run build",
         "dev": "npm run compile-clone && npm run clone && cross-env DEVELOPMENT=true npm run start",
         "run-frontend": "cd src/frontend && npm start",
-        "build": "npm run build-frontend && npm run make"
+        "build": "npm run build-frontend && npm run compile-clone && npm run clone && npm run make"
     },
     "author": "Neeraj Surjaye",
     "license": "MIT",
