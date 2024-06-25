@@ -14,3 +14,7 @@ Followed - https://raytracing.github.io/books/RayTracingInOneWeekend.html
 
 Use ppm viewer to view images if output is in ppm format
 link - https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html
+
+Sample images-
+![alt text](sample_output/output_1.png)
+![alt text](sample_output/output_2.png)
