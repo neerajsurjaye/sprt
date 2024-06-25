@@ -52,7 +52,7 @@ class Core {
     render(channel: any, config: any): Object {
         console.log("Rendering");
 
-        config = config ? config : {};
+        config = config || {};
         config.camera = config.camera
             ? config.camera
             : {
@@ -92,7 +92,7 @@ class Core {
     renderNormal(channel: any, config: any): Object {
         console.log("Rendering");
 
-        config = config ? config : {};
+        config = config || {};
         config.camera = config.camera
             ? config.camera
             : {
