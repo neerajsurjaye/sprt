@@ -22,3 +22,4 @@ Simple raytracing engine using nodejs.
 
 ![alt text](sample_output/output_1.png)
 ![alt text](sample_output/output_2.png)
+![alt text](sample_output/output_3.png)
