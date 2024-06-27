@@ -1,16 +1,24 @@
-"# SpRT"
+# SpRT
+
 Simple raytracing engine using nodejs.
 
-"# To execute app"
-Open two terminals and execute these commands in order
-run 'npm run run-frontend'
-run 'npm run dev'
+# To execute app in dev
 
-"# for building project"
-run 'npm run build'
-//final build avilable at out/make
+> Open two terminals and execute these commands in order in two terminals  
+> run 'npm run run-frontend'  
+> run 'npm run execute-app'
+>
+> > > > > > > 687325db7cfe7393daf1a2c2870b2ed6a2fac1e3
 
-Followed - https://raytracing.github.io/books/RayTracingInOneWeekend.html
+# To build the project
 
-Use ppm viewer to view images if output is in ppm format
-link - https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html
+> execute  
+> run 'npm run build'  
+> _final build avilable at out/make_
+
+### Followed - https://raytracing.github.io/books/RayTracingInOneWeekend.html
+
+## Sample images-
+
+![alt text](sample_output/output_1.png)
+![alt text](sample_output/output_2.png)
