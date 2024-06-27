@@ -8,7 +8,6 @@ Simple raytracing engine using nodejs.
 > run 'npm run run-frontend'  
 > run 'npm run execute-app'
 >
-> > > > > > > 687325db7cfe7393daf1a2c2870b2ed6a2fac1e3
 
 # To build the project
 
